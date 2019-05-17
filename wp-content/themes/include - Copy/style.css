@@ -1,0 +1,76 @@
+/*
+Theme Name: The Last Fire 
+Author: Shiva Shirbhate
+Author URI: https://wordpress.org/
+Description: This theme is a modernized take on an WordPress look beautiful everywhere.
+Version: 0.1
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: one-column, two-columns, right-sidebar, accessibility-ready, custom-background, custom-colors, custom-header, custom-menu, editor-style, featured-images, flexible-header, microformats, post-formats, rtl-language-support, sticky-post, threaded-comments, translation-ready, blog
+Text Domain: fire
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+*/
+
+.widget-title {
+	font-size: 20px;
+	border-bottom: 1px solid #000;
+	padding-bottom: 10px;
+	padding-top: 7px;
+}
+.widget-content {
+	padding-bottom: 15px;
+}
+.widget-wrapper {
+	background-color: #ddd;
+	padding: 5px;
+	margin-top: 15px;
+}
+.calendar_wrap table {
+	margin-top: 15px;
+	width: 100%;
+}
+.current_page_item.active, .current_page_item.active a {
+	background-color: #ddd;
+}
+.background-header {
+	background-color: #0081b8;
+}
+.wp-custom-logo #main_navbar {
+	background-color: #0081b8 !important;
+	border-top: 2px solid #fff;
+}
+	
+.background-header .nav-item.nav-link {
+	color: #fff;
+}
+.wp-custom-logo img.custom-logo {
+	height: 72px !important;
+	width: auto!important;
+	float: right;
+}
+
+.site-title {
+	font-size: 30px;
+    line-height: 31px;
+    margin: 0px;
+    padding: 0px;
+    height: 72px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.site-description {
+	font-size: 30px;
+    line-height: 31px;
+    margin: 0px;
+    padding: 0px;
+    height: 72px;
+    color: #fff;
+    font-weight: lighter;
+}
+.row.logo-header-text {
+    padding-top: 25px;
+    padding-bottom: 38px;
+}
