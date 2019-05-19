@@ -46,12 +46,12 @@ function fire_menu_header_foot() {
 
     // the register_nav_menus call is what you should copy into your own
     // themes setup function.
-    register_nav_menus(
-        array(
+	register_nav_menus(
+		array(
             'footer_nav' => __( 'Footer Menu', 'fire' ), // example of adding a menu location
             'top_menu' => __( 'Top Menu', 'fire' ), // we will be using this top_menu location
         )
-    );
+	);
 
 }
 // this will hook the setup function in after other setup actions.
@@ -78,29 +78,29 @@ add_action( 'widgets_init', 'fire_sidebar_widgets_init' );
 
 // redirect to somepage for subscribers
 function login_redirect( $redirect_to, $requested_redirect_to, $user ) {
-    if ( isset($user->roles) && is_array($user->roles) ) {
+	if ( isset($user->roles) && is_array($user->roles) ) {
 
-        if ( in_array('subscriber', $user->roles) ) {
+		if ( in_array('subscriber', $user->roles) ) {
 
-            if ( $requested_redirect_to && admin_url() != $requested_redirect_to ) {
-                $redirect_to = $requested_redirect_to;
-            } else {
-                $redirect_to =  home_url();
-            }
+			if ( $requested_redirect_to && admin_url() != $requested_redirect_to ) {
+				$redirect_to = $requested_redirect_to;
+			} else {
+				$redirect_to =  home_url();
+			}
 
-        }
-    }
-    return $redirect_to;
+		}
+	}
+	return $redirect_to;
 }
 add_filter( 'login_redirect', 'login_redirect', 10, 3 );
 
 //redirect for unauthenticated pages for users.
 add_action('template_redirect','my_non_logged_redirect');
 function my_non_logged_redirect() {
-     if ((is_page('my-action-plan')) && !is_user_logged_in() ) {
-        wp_redirect( home_url() );
-        die();
-    }
+	if ((is_page('my-action-plan')) && !is_user_logged_in() ) {
+		wp_redirect( home_url() );
+		die();
+	}
 } 
 
 //custom post type for 8 modules
@@ -119,13 +119,13 @@ function module_posttype() {
 		'search_items'       => __( 'Search Modules', 'fire' ),
 		'parent_item_colon'  => __( 'Parent Modules:', 'fire' ),
 		'not_found'          => __( 'No moudles found.', 'fire' ),
-		'not_found_in_trash' => __( 'No moudles found in Trash.', 'fire' )
+		'not_found_in_trash' => __( 'No moudles found in Trash.', 'fire' ),
 	);
 
 	$args = array(
 		'labels'             => $labels,
-        'description'        => __( 'Description.', 'fire' ),
-		'public'             => true,
+		'description'        => __( 'Description.', 'fire' ),
+		'public'             => false,
 		'publicly_queryable' => true,
 		'show_ui'            => true,
 		'show_in_menu'       => true,
@@ -133,14 +133,59 @@ function module_posttype() {
 		'rewrite'            => array( 'slug' => 'module' ),
 		'capability_type'    => 'post',
 		'has_archive'        => true,
-		'hierarchical'       => false,
+		'hierarchical'       => true,
 		'menu_position'      => null,
-		'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt' )
+		'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'page-attributes')
 	);
 
-  register_post_type( 'modules', $args );
+	register_post_type( 'modules', $args );
 }
 add_action( 'init', 'module_posttype' );
+
+
+// adding module parent column for reference
+add_filter( 'manage_edit-modules_columns', 'add_columns' );
+/**
+ * Add columns to management page
+ *
+ * @param array $columns
+ *
+ * @return array
+ */
+function add_columns( $columns ) {
+    $columns['page_attributes'] = 'Page Attribute';
+    return $columns;
+}
+
+
+// adding data to module parent coulumn
+add_action( 'manage_modules_posts_custom_column', 'columns_content', 10, 2 );
+
+/**
+ * Set content for columns in management page
+ *
+ * @param string $column_name
+ * @param int $post_id
+ *
+ * @return void
+ */
+function columns_content( $column_name, $post_id ) {
+	if ( 'page_attributes' != $column_name ) {
+		return;
+	}
+	$postid = get_post($post_id)->post_parent;
+	if ( $postid ){
+		echo $post_id . ' (Pg Id): ' . get_post($postid)->post_name . '-' . $postid;
+	} else {
+		echo $post_id . ' (Pg Id): [No Parent]';
+	}
+	
+}
+
+
+
+
+
 
 
 
@@ -166,7 +211,7 @@ function create_posttype() {
 
 	$args = array(
 		'labels'             => $labels,
-        'description'        => __( 'Description.', 'fire' ),
+		'description'        => __( 'Description.', 'fire' ),
 		'public'             => true,
 		'publicly_queryable' => true,
 		'show_ui'            => true,
@@ -180,15 +225,15 @@ function create_posttype() {
 		'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt' )
 	);
 
-  register_post_type( 'chapters', $args );
+	register_post_type( 'chapters', $args );
 }
 add_action( 'init', 'create_posttype' );
 
 
 
 function skip_mail($f){
-    $submission = WPCF7_Submission::get_instance();
-    return true;
+	$submission = WPCF7_Submission::get_instance();
+	return true;
 }
 add_filter('wpcf7_skip_mail','skip_mail');
 
@@ -197,8 +242,8 @@ add_action("wpcf7_before_send_mail", "save_contact_form_data");
 function save_contact_form_data($cf7) {
     // get the contact form object
     // $wpcf = WPCF7_ContactForm::get_current();
-    $submission = WPCF7_Submission::get_instance();
-    print_r($submission);die;
+	$submission = WPCF7_Submission::get_instance();
+	print_r($submission);die;
     // if you wanna check the ID of the Form $wpcf->id
 
     // if (/*Perform check here*/) {
@@ -206,7 +251,7 @@ function save_contact_form_data($cf7) {
     //     $wpcf->skip_mail = true;    
     // }
 
-    return $wpcf;
+	return $wpcf;
 }
 
 ?>
