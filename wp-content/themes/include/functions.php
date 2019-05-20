@@ -85,7 +85,7 @@ function login_redirect( $redirect_to, $requested_redirect_to, $user ) {
 			if ( $requested_redirect_to && admin_url() != $requested_redirect_to ) {
 				$redirect_to = $requested_redirect_to;
 			} else {
-				$redirect_to =  home_url();
+				$redirect_to =  site_url() . '/module-library';
 			}
 
 		}
@@ -137,7 +137,7 @@ function module_posttype() {
 		'menu_position'      => null,
 		'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'page-attributes')
 	);
-
+	add_theme_support( 'post-thumbnails',  array('modules', 'page'));
 	register_post_type( 'modules', $args );
 }
 add_action( 'init', 'module_posttype' );
@@ -156,6 +156,7 @@ function add_columns( $columns ) {
     $columns['page_attributes'] = 'Page Attribute';
     return $columns;
 }
+
 
 
 // adding data to module parent coulumn
@@ -255,3 +256,35 @@ function save_contact_form_data($cf7) {
 }
 
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ajax call -->
+<?php 
+
+add_action( 'wp_ajax_my_action', 'my_action' );
+
+function my_action() {
+	global $wpdb; // this is how you get access to the database
+
+	$whatever = intval( $_POST['whatever'] );
+
+	$whatever += 10;
+
+        echo $whatever;
+
+	wp_die(); // this is required to terminate immediately and return a proper response
+}
+
+
