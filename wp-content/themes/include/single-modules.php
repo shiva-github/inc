@@ -4,7 +4,9 @@
 
  
 get_header(); ?>
-
+<script type="text/javascript">
+    var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
+</script>
 
 <div class="container">
 	<div class="row">
@@ -17,18 +19,23 @@ get_header(); ?>
 
 			</div>
 			<div class="col-md-8 right-panel-module">
-				<div class="content-module" style="padding-top: 55px;">
+				<div class="content-module" id="page-content" style="padding-top: 55px;">
 					<h2><?php the_title(); ?></h2>
 					<p><?php the_content(); ?></p>
-				</div>
-				<div class="content-navigate-module">
-					<?php 
-					$post_list = get_post()->module_chapters;
-					$firstlink = get_post($post_list[0]);
+					<div class="content-navigate-module text-center">
+						<?php 
 
-					?>
-					<a class="learn-more" href="<?php echo $firstlink->guid; ?>" title="">Continue</a>
-					<a class="learn-more" id="click" href="javascript:void(0);" title="">Ajax Call</a>
+						$post_list = get_post()->module_chapters;
+						$firstlink = get_post($post_list[0]);
+						$lastLink  = $post_list[count($post_list)-1];
+						
+						?>
+						<input type="hidden" name="module-number" value="<?php echo get_post()->ID; ?>">
+						<input type="hidden" name="current-page" value="-1">
+						<input type="hidden" name="first-page" value="<?php echo $firstlink->ID; ?>">
+						<input type="hidden" name="last-page" value="<?php echo $lastLink->ID; ?>">
+						<button class="learn-more" id="ajax-btn">Continue</button>
+					</div>
 				</div>
 			</div>
 					<?php
@@ -40,24 +47,5 @@ get_header(); ?>
 	</div>
 </div>
 <?php
-add_action( 'admin_footer', 'my_action_javascript' ); // Write our JS below here
 
-function my_action_javascript() { ?>
-	<script type="text/javascript" >
-	jQuery(document).ready(function($) {
-
-		var data = {
-			'action': 'my_action',
-			'whatever': 1234
-		};
-
-		// since 2.8 ajaxurl is always defined in the admin header and points to admin-ajax.php
-		$("#click").click(function() {
-			jQuery.post(ajaxurl, data, function(response) {
-				alert('Got this from the server: ' + response);
-			});
-		})
-	});
-	</script> <?php
-}
  get_footer(); ?>

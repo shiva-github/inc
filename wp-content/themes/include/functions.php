@@ -1,6 +1,7 @@
 <?php
 
 require_once 'class-wp-bootstrap-navwalker.php';
+require_once 'functions/module-ajax.php';
 
 
 
@@ -12,11 +13,9 @@ function fire_theme_enqueue_scripts() {
     // all scripts
 	wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '20120206', true );
 	wp_enqueue_script( 'theme-script', get_template_directory_uri() . '/assets/js/script.js', array('jquery'), '20120206', true );
-}
+
+	}
 add_action( 'wp_enqueue_scripts', 'fire_theme_enqueue_scripts' );
-
-
-
 
 
 // logo of the website 
@@ -254,37 +253,3 @@ function save_contact_form_data($cf7) {
 
 	return $wpcf;
 }
-
-?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- ajax call -->
-<?php 
-
-add_action( 'wp_ajax_my_action', 'my_action' );
-
-function my_action() {
-	global $wpdb; // this is how you get access to the database
-
-	$whatever = intval( $_POST['whatever'] );
-
-	$whatever += 10;
-
-        echo $whatever;
-
-	wp_die(); // this is required to terminate immediately and return a proper response
-}
-
-
