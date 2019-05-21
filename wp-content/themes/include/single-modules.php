@@ -26,15 +26,15 @@ get_header(); ?>
 						<?php 
 
 						$post_list = get_post()->module_chapters;
-						$firstlink = get_post($post_list[0]);
+						$firstlink = $post_list[0];
 						$lastLink  = $post_list[count($post_list)-1];
 						
 						?>
 						<input type="hidden" name="module-number" value="<?php echo get_post()->ID; ?>">
 						<input type="hidden" name="current-page" value="-1">
-						<input type="hidden" name="first-page" value="<?php echo $firstlink->ID; ?>">
-						<input type="hidden" name="last-page" value="<?php echo $lastLink->ID; ?>">
-						<button class="learn-more" id="ajax-btn">Continue</button>
+						<input type="hidden" name="first-page" value="<?php echo $firstlink; ?>">
+						<input type="hidden" name="last-page" value="<?php echo $lastLink; ?>">
+						<button class="learn-more btn-ajax" id="ajax-btn" data="next" load="<?php echo $firstlink; ?>">Continue</button>
 					</div>
 				</div>
 			</div>
