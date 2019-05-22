@@ -59,7 +59,7 @@ function my_action_javascript() { ?>
 			$final_data['load'] = $chapters[$current_page];
 
 		// if exist or redirect to next module and so on...
-			$final_data['next'] = $chapters[$current_page+1];
+			$final_data['next'] = $chapters[$current_page];
 
 			$final_data['first'] = $first_page;
 			$final_data['last'] = $last_page;

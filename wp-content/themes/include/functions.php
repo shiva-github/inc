@@ -77,16 +77,15 @@ add_action( 'widgets_init', 'fire_sidebar_widgets_init' );
 
 // redirect to somepage for subscribers
 function login_redirect( $redirect_to, $requested_redirect_to, $user ) {
+
 	if ( isset($user->roles) && is_array($user->roles) ) {
 
 		if ( in_array('subscriber', $user->roles) ) {
-
 			if ( $requested_redirect_to && admin_url() != $requested_redirect_to ) {
 				$redirect_to = $requested_redirect_to;
 			} else {
 				$redirect_to =  site_url() . '/module-library';
 			}
-
 		}
 	}
 	return $redirect_to;
