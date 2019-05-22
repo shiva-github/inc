@@ -16,7 +16,20 @@ get_header(); ?>
 				while (have_posts()) : the_post(); 
 					?>
 			<div class="col-md-4 left-panel-module">		
-
+				<!-- listing of children posts here!!! -->
+				<?php 
+				$arg_child_post =  array(
+					'post_parent' => get_post()->ID,
+					'post_type'   => 'modules', 
+					'numberposts' => -1,
+					'post_status' => 'publish', 
+				);
+				
+				$current_module_child_posts = get_children( $arg_child_post );
+				foreach ($current_module_child_posts as $value) {
+					echo $value->post_title;
+				}
+				?>
 			</div>
 			<div class="col-md-8 right-panel-module">
 				<div class="content-module" id="page-content" style="padding-top: 55px;">
