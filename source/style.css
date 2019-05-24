@@ -12,6 +12,7 @@ Text Domain: fire
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap');
 html {
 	
 	height: calc(100% - 32px);
@@ -20,6 +21,7 @@ body {
 	min-height: 100%;
 	position: relative;
 	padding-bottom: 320px;
+	font-family: 'Open Sans', sans-serif;
 }
 .widget-title {
 	font-size: 20px;
@@ -35,7 +37,13 @@ body {
 	padding: 5px;
 	margin-bottom: 15px;
 }
-
+.background-header .nav-item.nav-link:hover {
+	color: #fff;
+	text-decoration: underline;
+}
+.page-id-168  .module-listing-desc .w-75.float-left img {
+	display: none;
+}
 .calendar_wrap table {
 	margin-top: 15px;
 	width: 100%;
@@ -85,6 +93,7 @@ body {
 	height: 72px;
 	color: #fff;
 	font-weight: lighter;
+	width: 90%;
 }
 .row.logo-header-text {
 	padding-top: 25px;
@@ -207,7 +216,7 @@ footer {
 }
 .module-listing-desc {
 	font-size: 14px;
-	min-height: 250px;
+	min-height: 275px;
 }
 ul {
 	padding-left: 25px;
