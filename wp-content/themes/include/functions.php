@@ -182,13 +182,6 @@ function columns_content( $column_name, $post_id ) {
 }
 
 
-
-
-
-
-
-
-
 //custom post type for 8 modules
 function create_posttype() {
 	$labels = array(
@@ -237,12 +230,23 @@ function skip_mail($f){
 add_filter('wpcf7_skip_mail','skip_mail');
 
 
+add_action('after_setup_theme', 'remove_admin_bar');
+ 
+function remove_admin_bar() {
+if (!current_user_can('administrator') && !is_admin()) {
+  show_admin_bar(false);
+}
+}
+
+
 add_action("wpcf7_before_send_mail", "save_contact_form_data");  
 function save_contact_form_data($cf7) {
     // get the contact form object
     // $wpcf = WPCF7_ContactForm::get_current();
 	$submission = WPCF7_Submission::get_instance();
-	print_r($submission);die;
+	$text_area_contents = $cf7->posted_data;
+	// print_r($submission);die;
+	print_r($cf7->raw_values);die;
     // if you wanna check the ID of the Form $wpcf->id
 
     // if (/*Perform check here*/) {

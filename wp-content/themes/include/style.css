@@ -12,6 +12,8 @@ Text Domain: fire
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 */
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap');
 html {
 	
 	height: calc(100% - 32px);
@@ -20,6 +22,7 @@ body {
 	min-height: 100%;
 	position: relative;
 	padding-bottom: 320px;
+	font-family: 'Open Sans', sans-serif;
 }
 .widget-title {
 	font-size: 20px;
@@ -50,17 +53,34 @@ body {
 	background-color: #0081b8 !important;
 	border-top: 2px solid #fff;
 	min-height: 50px;
+	padding: 0px;
 }
 
 .background-header .nav-item.nav-link {
 	color: #fff;
+	font-weight: lighter;
+	font-size: 15px;
+	line-height: 15px;
+}
+.background-header .nav-item.nav-link:hover {
+	color: #fff;
+	text-decoration: underline;
+}
+.dropdown-toggle::after {
+	border-top: 0.2em solid;
+	border-right: .2em solid transparent;
+	border-left: .2em solid transparent;
 }
 .background-header #menu-header > .menu-item > a, .background-header .menu-item {
 	color: #fff !important;
 	background-color: transparent !important;
-	font-size: 18px;
-	font-weight: 500;
+	font-size: 20px;
+	line-height: 25px;
 }
+.background-header .menu-item > a {
+	padding: 10px 20px !important;
+}
+
 .wp-custom-logo img.custom-logo {
 	height: 72px !important;
 	width: auto!important;
@@ -74,7 +94,7 @@ body {
 	padding: 0px;
 	height: 72px;
 	color: #fff;
-	font-weight: bold;
+	font-weight: 600;
 }
 
 .site-description {
@@ -85,6 +105,7 @@ body {
 	height: 72px;
 	color: #fff;
 	font-weight: lighter;
+	width: 90%;
 }
 .row.logo-header-text {
 	padding-top: 25px;
@@ -105,6 +126,7 @@ body {
 .tml-submit-wrap {
 	text-align: center;
 }
+
 .tml.tml-register .description.indicator-hint{
 	display: none;
 }
@@ -116,6 +138,7 @@ body {
 	content: ' *';
 	color: #f00;
 }
+
 .mainpage #searchsubmit, button, [type="submit"] {
 	padding: 0px 25px;
 	font-weight: 800;
@@ -130,7 +153,9 @@ body {
 	color: #fff !important;
 	background-color: #004c98;
 	font-size: 16px;
-
+}
+.mainpage h2 {
+	font-weight: lighter;
 }
 .mainpage #searchsubmit:hover, button:hover {
 	background-color: #525455;
@@ -180,11 +205,11 @@ footer {
 	-o-box-shadow: 0px -5px 20px 0px rgba(82, 84, 85, 0.4);
 	box-shadow: 0px -5px 20px 0px rgba(82, 84, 85, 0.4);
 	/*margin-top: 50px;*/
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+
 }
 .img-footer img {
 	margin-left: 15px;
@@ -230,6 +255,7 @@ ul {
 }
 .left-panel-module {
 	border-right: 1px solid #ddd;
+	background-color: #f0f0f0;
 }
 body.single-modules {
 	padding-bottom: 275px;
@@ -242,4 +268,23 @@ body.single-modules {
 }
 .content-navigate-module {
 
+}
+.left-panel-module ul {
+	list-style: none;
+	padding: 0;
+	width: 100%;
+	margin-bottom: 0px;
+}
+.left-panel-module > ul > li {
+	background-color: #fff;
+	margin-top: 10px;
+}
+.left-panel-module > ul ul {
+	background-color: #fff;
+}
+.left-panel-module > ul > li > ul {
+	display: none;
+}
+.left-panel-module > ul > li.active ul {
+	display: block;
 }

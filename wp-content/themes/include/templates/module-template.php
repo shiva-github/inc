@@ -32,8 +32,10 @@ get_header();
 					'post_status' => 'publish',
 					'orderby' => 'meta_value',
 					'order' => 'ASC',
+					 'post_parent' => 0,
 				);
 				$module_listing = new WP_Query( $args );
+				
 				if( $module_listing->have_posts() ) :
 					$counter = 0;
 					while( $module_listing->have_posts() ):
