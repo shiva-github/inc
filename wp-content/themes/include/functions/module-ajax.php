@@ -11,12 +11,10 @@ function my_action_javascript() { ?>
 		$(".mainpage").on('click', '.btn-ajax', function(event) {
 			
 			var data = {
-				'action': 'my_action',
+				'action'		: 'my_action',
 				'module_number'	: $('[name="module-number"]').val(),
 				'current_page'	: $('[name="current-page"]').val(),
 				'nav'			: $(this).attr('data'),
-				'first_page'	: $('[name="first-page"]').val(),
-				'last_page'		: $('[name="last-page"]').val(),
 				'load'			: $(this).attr('load'),
 			};
 
@@ -34,24 +32,41 @@ function my_action_javascript() { ?>
 	function my_action() {
 	global $wpdb; // this is how you get access to the database
 
+	// current parent module
+	$current_parent_module 	= intval( $_POST['module_number'] );
+	$current_post 			= get_post(intval( $_POST['current_page'] ));
+
+	$action_on_post 		= intval($_POST['load']);
+	$action_prev_next 		= intval($_POST['nav']);
+	if( 'modules' === $current_post->post_type ) {
+		execute_module($current_post, $action_on_post, $action_prev_next);
+	}
+	if( 'pages' === $current_post->post_type ) {
+		execute_pages($current_post, $action_on_post, $action_prev_next);
+	}
+	wp_die();
+
+
+
+
+
 	// Ajax data loaded here
 	$module_number = intval( $_POST['module_number'] );
-
-	$first_page = intval( $_POST['first_page'] );
-	$last_page = intval( $_POST['last_page'] );
-
+	
 
 	$module_post = get_post($module_number);
 	$load_post = intval($_POST['load']);
+	echo "<pre>";
 	
 	$current_page = intval( $_POST['current_page'] );
-	var_dump();die;
-	$has_pages = intval(count($module_post->module_chapters));
+	$has_pages = intval(count(get_post($load_post)->module_chapters));
+	
 	if ($has_pages) {
 		execute_pages();
 	} else {
 		execute_module();
 	}
+	var_dump($has_pages);wp_die();
 	if ($current_page != -1) {
 		// echo get_post(get_post($module_number)->module_chapters[$current_page+1])->post_content;
 		
@@ -124,11 +139,30 @@ function my_action_javascript() { ?>
 	wp_die(); // this is required to terminate immediately and return a proper response
 }
 
-function execute_pages() {
-	echo "pages executed";
-	die;
+function execute_pages($page_current, $action_on_post, $action) {
+	
+	return;
 }
-function execute_module() {
-	echo "pages executed";
-	die;
+function execute_module($module_current, $action_on_post, $action) {
+	
+	// var_dump($module_current);
+	if(0 == $action ) {
+		var_dump(get_post($action_on_post));
+	}
+	
+	if(1 == $action ) {
+		$has_pages = get_post($action_on_post)->module_chapters;
+		// var_dump($has_pages);
+		if( $has_pages ) {
+			echo 1;
+		} else {
+			echo 2;
+		}
+	}
+	
+	if(-1 == $action ) {
+
+	}
+	
+	return;
 }
