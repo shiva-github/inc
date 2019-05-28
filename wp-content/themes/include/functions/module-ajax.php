@@ -8,7 +8,7 @@ function my_action_javascript() { ?>
 
 
 		// since 2.8 ajaxurl is always defined in the admin header and points to admin-ajax.php
-		$("#page-content").on('click', '.btn-ajax', function(event) {
+		$(".mainpage").on('click', '.btn-ajax', function(event) {
 			
 			var data = {
 				'action': 'my_action',
@@ -45,9 +45,16 @@ function my_action_javascript() { ?>
 	$load_post = intval($_POST['load']);
 	
 	$current_page = intval( $_POST['current_page'] );
-
+	var_dump();die;
+	$has_pages = intval(count($module_post->module_chapters));
+	if ($has_pages) {
+		execute_pages();
+	} else {
+		execute_module();
+	}
 	if ($current_page != -1) {
 		// echo get_post(get_post($module_number)->module_chapters[$current_page+1])->post_content;
+		
 
 		if( 'prev' == esc_html($_POST['nav'] ) ) {
 			$chapters = get_post($module_number)->module_chapters;
@@ -115,4 +122,13 @@ function my_action_javascript() { ?>
         // echo $current_page+1;
 
 	wp_die(); // this is required to terminate immediately and return a proper response
+}
+
+function execute_pages() {
+	echo "pages executed";
+	die;
+}
+function execute_module() {
+	echo "pages executed";
+	die;
 }
