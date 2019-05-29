@@ -14,7 +14,7 @@ function fire_theme_enqueue_scripts() {
 	wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '20120206', true );
 	wp_enqueue_script( 'theme-script', get_template_directory_uri() . '/assets/js/script.js', array('jquery'), '20120206', true );
 
-	}
+}
 add_action( 'wp_enqueue_scripts', 'fire_theme_enqueue_scripts' );
 
 
@@ -151,8 +151,8 @@ add_filter( 'manage_edit-modules_columns', 'add_columns' );
  * @return array
  */
 function add_columns( $columns ) {
-    $columns['page_attributes'] = 'Page Attribute';
-    return $columns;
+	$columns['page_attributes'] = 'Page Attribute';
+	return $columns;
 }
 
 
@@ -231,11 +231,11 @@ add_filter('wpcf7_skip_mail','skip_mail');
 
 
 add_action('after_setup_theme', 'remove_admin_bar');
- 
+
 function remove_admin_bar() {
-if (!current_user_can('administrator') && !is_admin()) {
-  show_admin_bar(false);
-}
+	if (!current_user_can('administrator') && !is_admin()) {
+		show_admin_bar(false);
+	}
 }
 
 
@@ -256,3 +256,5 @@ function save_contact_form_data($cf7) {
 
 	return $wpcf;
 }
+
+

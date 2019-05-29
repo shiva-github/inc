@@ -15,12 +15,26 @@ get_header(); ?>
 				<?php 
 				while (have_posts()) : the_post(); 
 					?>
-					<div class="col-md-4 left-panel-module">		
+					<div class="col-md-4 left-panel-module">
 						<!-- listing of children posts here!!! -->
-						<ul class="clear-both">
+						<ul class="clear-both" id="module-current">
 						<?php 
+						$load_post = get_post()->ID;
+						$post_parent1 = wp_get_post_parent_id(get_post()->ID);
+						$post_parent2 = wp_get_post_parent_id($post_parent1);
+						$post_parent3 = wp_get_post_parent_id($post_parent2);
+
+						if ( $post_parent1 ) {
+							$load_post = $post_parent1;
+						}
+						if ( $post_parent2 ) {
+							$load_post = $post_parent2;
+						}
+						if ( $post_parent3 ) {
+							$load_post = $post_parent3;
+						}
 						$arg_child_post =  array(
-							'post_parent' 	=> get_post()->ID,
+							'post_parent' 	=> $load_post,
 							'post_type'   	=> 'modules', 
 							'numberposts' 	=> -1,
 							'post_status' 	=> 'publish', 
@@ -39,11 +53,11 @@ get_header(); ?>
 								'orderby'		=>'menu_order', 
 								'order'   		=> 'ASC',
 							);
-							echo '<li class="clear-both pr-2 pt-2 pb-2 pl-4 btn-ajax" data="0" load="' . $value->ID . '">' . $value->post_title ;
+							echo '<li class="clear-both pr-2 pt-2 pb-2 pl-4 btn-ajax" data="0" load="' . $value->ID . '" ><a href="'.get_permalink($value->ID).'">' .  $value->post_title . '</a>';
 							$module_child_posts = get_children( $arg_child_post );
 							echo '<ul class="mb-2 clear-both">';
 							foreach ($module_child_posts as $value1) {
-								echo '<li class="mt-2 pl-2 pr-2 pt-1 pb-1 btn-ajax" data="0" load="' . $value1->ID . '">' . $value1->post_title . '</li>';
+								echo '<li class="clear-both pr-2 pt-2 pb-2 pl-4 btn-ajax" data="0" load="' . $value1->ID . '" ><a href="'.get_permalink($value1->ID).'">' .  $value1->post_title . '</a></li>';
 							}
 							echo '</ul>';
 							echo '</li>';
@@ -57,15 +71,31 @@ get_header(); ?>
 							<p><?php the_content(); ?></p>
 							<div class="content-navigate-module text-center">
 								<?php 
+									// previous button
 
-								$post_list = get_post()->module_chapters;
-								$firstlink = $post_list[0];
-								$lastLink  = $post_list[count($post_list)-1];
+								$link_prev =  get_post_meta($post->ID, 'previous_link', true);
+								$link_text_prev = get_post_meta($post->ID, 'previous_link_text', true);
+								if($link_prev) {
+
+								?>
+								
+
+								<?php 
+
+								}
+									// previous button end
+								$next_link = get_post_meta($post->ID, 'next_link', true);
+								$next_text_link = get_post_meta($post->ID, 'next_link', true);
+								if($next_link) {
+								
+									// next button start
 								
 								?>
-								<input type="hidden" name="module-number" value="<?php echo get_post()->ID; ?>">
-								<input type="hidden" name="current-page" value="<?php echo get_post()->ID; ?>">								
-								<button class="learn-more btn-ajax" id="ajax-btn" data="1" load="<?php echo $firstlink; ?>">Continue</button>
+								<button class="learn-more btn-ajax" id="ajax-btn" data="-1" load="<?php echo $firstlink; ?>">Continue</button>
+
+								<?php 
+								}
+								?>
 							</div>
 						</div>
 					</div>
