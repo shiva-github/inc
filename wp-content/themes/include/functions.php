@@ -95,7 +95,7 @@ add_filter( 'login_redirect', 'login_redirect', 10, 3 );
 //redirect for unauthenticated pages for users.
 add_action('template_redirect','my_non_logged_redirect');
 function my_non_logged_redirect() {
-	if ((is_page('my-action-plan')) && !is_user_logged_in() ) {
+	if ((is_page('my-action-plan') || (is_page('module-library'))) && !is_user_logged_in() ) {
 		wp_redirect( home_url() );
 		die();
 	}
@@ -123,7 +123,7 @@ function module_posttype() {
 	$args = array(
 		'labels'             => $labels,
 		'description'        => __( 'Description.', 'fire' ),
-		'public'             => false,
+		'public'             => true,
 		'publicly_queryable' => true,
 		'show_ui'            => true,
 		'show_in_menu'       => true,
@@ -258,3 +258,12 @@ function save_contact_form_data($cf7) {
 }
 
 
+function load_progress_module($user, $post, $parent) {
+// 	$wpdb->insert( 'wp_progress_tracker', array(
+// 		'id' => null,
+// 		'userid' => $user, 
+// 		'moduleid' => $post, 
+// 		'parent_module' => $parent),
+// 	array( '%d', '%d', '%d', '%d') ;
+// );
+}

@@ -16,6 +16,7 @@ get_header(); ?>
 				while (have_posts()) : the_post(); 
 					?>
 					<div class="col-md-4 left-panel-module">
+						<!-- listing of children posts here!!! -->
 						<div class="w-100 mt-5 clear-both mb-5">
 							<div class="w-50 float-left text-center"><img src="<?php echo site_url();?>/wp-content/themes/include/assets/images/grey.jpg" style="border-radius: 50%;width: 100px;height: 100px;">
 							</div>
@@ -25,11 +26,15 @@ get_header(); ?>
 								<p style="margin-bottom: 0;font-weight: 700">complete</p>
 							</div>
 						</div>
-						<!-- listing of children posts here!!! -->
-						<ul class="clear-both" id="module-current" parent="<?php echo get_post()->ID; ?>">
 						<?php 
-						$load_post = get_post()->ID;
-						$post_parent1 = wp_get_post_parent_id(get_post()->ID);
+
+						$mod_current = get_post_meta(get_the_ID(), 'parent_module', true);
+						if ($mod_current == '') {
+							echo "Something went wrong. Please avoid to access this page.";die;
+						}
+						$load_post = $mod_current;
+
+						$post_parent1 = wp_get_post_parent_id(get_post($load_post)->ID);
 						$post_parent2 = wp_get_post_parent_id($post_parent1);
 						$post_parent3 = wp_get_post_parent_id($post_parent2);
 
@@ -42,6 +47,7 @@ get_header(); ?>
 						if ( $post_parent3 ) {
 							$load_post = $post_parent3;
 						}
+						
 						$arg_child_post =  array(
 							'post_parent' 	=> $load_post,
 							'post_type'   	=> 'modules', 
@@ -52,6 +58,10 @@ get_header(); ?>
 						);
 						
 						$current_module_child_posts = get_children( $arg_child_post );
+						?>
+
+						<ul class="clear-both" id="module-current" parent-mod="<?php echo $load_post; ?>">
+							<?php
 						foreach ($current_module_child_posts as $value) {
 							
 							$arg_child_post =  array(
@@ -62,16 +72,13 @@ get_header(); ?>
 								'orderby'		=>'menu_order', 
 								'order'   		=> 'ASC',
 							);
-							echo '<li class="clear-both"><a href="'.get_permalink($value->ID).'" class=" pr-2 pt-2 pb-2 pl-4 modules-menu-list">' .  $value->post_title . '</a>';
+							echo '<li class="clear-both pr-2 pt-2 pb-2 pl-4 btn-ajax" data="0" load="' . $value->ID . '" ><a href="'.get_permalink($value->ID).'">' .  $value->post_title . '</a>';
 							$module_child_posts = get_children( $arg_child_post );
-							if (count($module_child_posts)) {
-								echo '<ul class="clear-both">';
-								foreach ($module_child_posts as $value1) {
-									echo '<li class="clear-both"><a href="'.get_permalink($value1->ID).'" class=" modules-submenu ">' .  $value1->post_title . '</a></li>';
-								}
-								echo '</ul>';	
+							echo '<ul class="mb-2 clear-both">';
+							foreach ($module_child_posts as $value1) {
+								echo '<li class="clear-both pr-2 pt-2 pb-2 pl-4 btn-ajax" data="0" load="' . $value1->ID . '" ><a href="'.get_permalink($value1->ID).'">' .  $value1->post_title . '</a></li>';
 							}
-							
+							echo '</ul>';
 							echo '</li>';
 						}
 						?>
@@ -84,7 +91,7 @@ get_header(); ?>
 							<div class="content-navigate-module text-center">
 								<?php 
 									// previous button
-								
+
 								$link_prev =  get_post_meta(get_the_ID(), 'prev_link', true);
 								$link_text_prev = get_post_meta(get_the_ID(), 'prev_link_text', true);
 								if($link_prev) {

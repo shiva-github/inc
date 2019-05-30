@@ -12,6 +12,31 @@
 </head>
 
 <body <?php body_class(); ?>>
+
+  <?php 
+  if ( is_singular('modules')) {
+    $user = get_current_user_id();
+
+    global $post;     // if outside the loop
+
+    if ( is_singular('modules') && $post->post_parent ) {
+    // This is a subpage
+      $parent2 = get_post($post->post_parent)->post_parent;
+      if( $parent2 ){
+       echo $parent2;
+       // load_progress_module($user, $post->ID, $post->post_parent);
+      } else {
+        // echo $user, $post->ID, $post->post_parent;
+        load_progress_module($user, $post->ID, $post->post_parent);
+      }
+    } else {
+    // This is not a subpage
+      // var_dump($post->ID);
+    }
+  }
+
+  ?>
+  
     <div class="background-header">
         <header>
             <div class="container">
@@ -52,11 +77,20 @@
             <!-- <img src="<?php //get_template_directory_uri() . '/assets/images/header.jpg'?>"> -->
             <?php
             // if ( get_theme_mod('header_text') ) {
+
+            if(is_user_logged_in()) {
+              $site = '/module-library';
+            }
+            else {
+              $site = '/';
+            }
             ?>
             <div class="row logo-header-text">
                 <div class="col-9">
+                  <a href="<?php echo site_url() . $site;?>">
                     <h1 class="site-title float-left mr-1"><?php bloginfo( 'name' ); ?></h1>
                     <h1 class="site-description"><?php bloginfo( 'description' ); ?></h1>
+                  </a>
                 </div>
                 <div class="col-3">
                     <?php

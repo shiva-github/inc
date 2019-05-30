@@ -111,6 +111,9 @@ body {
 	padding-top: 25px;
 	padding-bottom: 38px;
 }
+.logo-header-text a {
+	text-decoration: none;
+}
 .mainpage input[type="text"], 
 .mainpage input[type="email"], 
 .mainpage input[type="password"] {
@@ -154,6 +157,22 @@ body {
 	background-color: #004c98;
 	font-size: 16px;
 }
+a.learn-more {
+	padding: 5px 25px;
+	font-weight: 800;
+	border-radius: 3px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	border: 0;
+	border-color: transparent;
+	text-decoration: none;
+	line-height: 30px;
+	color: #fff !important;
+	background-color: #004c98;
+	font-size: 16px;
+	margin-top: 10px;
+	display: inline-block;
+}
 .mainpage h2 {
 	font-weight: lighter;
 }
@@ -170,6 +189,17 @@ body {
 	text-align: center;
 	padding: 25px 0px;
 
+}
+.accordian-keyconcept{
+	background-color: #cfcfcf;
+	color: #428bca;
+	padding: 10px 15px;
+	font-weight: 600;
+	display: block;
+	border-radius: 4px;
+	margin: 10px 0px;
+	margin-left: 60px;
+	width: 100%;
 }
 .home .mainpage .page-title{
 	font-size: 34px;
@@ -232,7 +262,10 @@ footer {
 }
 .module-listing-desc {
 	font-size: 14px;
-	min-height: 250px;
+	min-height: 275px;
+}
+.module-listing-desc .w-75 img {
+	display: none;
 }
 ul {
 	padding-left: 25px;
@@ -278,6 +311,7 @@ body.single-modules {
 .left-panel-module > ul > li {
 	background-color: #fff;
 	margin-top: 10px;
+	margin-right: -15px;
 }
 .left-panel-module > ul ul {
 	background-color: #fff;
@@ -287,4 +321,32 @@ body.single-modules {
 }
 .left-panel-module > ul > li.active ul {
 	display: block;
+}
+.modules-menu-list {
+	display: inline-block;
+	color: #333;
+}
+.modules-submenu {
+	padding: 10px 10px 10px 40px;
+	font-size: 16px !important;
+	line-height: 20px !important;	
+	text-decoration: none;
+	display: block;
+	width: 100%;
+	color: #333;
+}
+#module-current li.current-menu > a{
+	font-size: 16px !important;
+	line-height: 20px !important;
+	background-color: #005b79;
+	color: #fff;
+	text-decoration: none;
+	font-weight: bold;
+	display: block;
+	width: 100%;
+}
+.health-box {
+	min-height: 250px;
+	border-color: #ccc;
+	background-color: #efefef;
 }
