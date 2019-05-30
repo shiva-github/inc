@@ -9,7 +9,9 @@
 
 get_header(); 
 ?>
-
+<script type="text/javascript">
+	var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
+</script>
 
 
 <div class="container" style="padding-top: 55px;">
@@ -62,7 +64,7 @@ get_header();
 							</div>
 							<div class="module-listing-desc clear-both pl-3 pr-3 pt-3 pb-2 " style="background-color: #21126123;color: #333;">
 								<div class="w-25 float-left text-center"><img src="<?php echo site_url();?>/wp-content/themes/include/assets/images/grey.jpg" style="border-radius: 50%;width: 75px;height: 75px;">
-									<p class="mt-2">0%</p>
+									<p class="mt-2 moduleNum" moduleNum="<?php echo get_the_ID(); ?>">0%</p>
 								</div>
 								<div class="pl-3 pr-3 w-75 float-left"><?php echo the_content(); ?></div>
 							</div>

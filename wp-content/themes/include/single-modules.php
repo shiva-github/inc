@@ -14,6 +14,21 @@ get_header(); ?>
 			<div class="row">
 				<?php 
 				while (have_posts()) : the_post(); 
+
+					$load_post = get_post()->ID;
+					$post_parent1 = wp_get_post_parent_id(get_post()->ID);
+					$post_parent2 = wp_get_post_parent_id($post_parent1);
+					$post_parent3 = wp_get_post_parent_id($post_parent2);
+
+					if ( $post_parent1 ) {
+						$load_post = $post_parent1;
+					}
+					if ( $post_parent2 ) {
+						$load_post = $post_parent2;
+					}
+					if ( $post_parent3 ) {
+						$load_post = $post_parent3;
+					}
 					?>
 					<div class="col-md-4 left-panel-module">
 						<div class="w-100 mt-5 clear-both mb-5">
@@ -21,27 +36,14 @@ get_header(); ?>
 							</div>
 							<div class="w-50 float-left pl-2" >
 								<p style="margin-bottom: 0;">Your progress</p>
-								<p style="margin-bottom: 0;font-size: 40px;font-weight: 100;">20%</p>
+								<p class="moduleNum" moduleNum="<?php echo $load_post; ?>" style="margin-bottom: 0;font-size: 40px;font-weight: 100;">0%</p>
 								<p style="margin-bottom: 0;font-weight: 700">complete</p>
 							</div>
 						</div>
 						<!-- listing of children posts here!!! -->
 						<ul class="clear-both" id="module-current" parent="<?php echo get_post()->ID; ?>">
 						<?php 
-						$load_post = get_post()->ID;
-						$post_parent1 = wp_get_post_parent_id(get_post()->ID);
-						$post_parent2 = wp_get_post_parent_id($post_parent1);
-						$post_parent3 = wp_get_post_parent_id($post_parent2);
-
-						if ( $post_parent1 ) {
-							$load_post = $post_parent1;
-						}
-						if ( $post_parent2 ) {
-							$load_post = $post_parent2;
-						}
-						if ( $post_parent3 ) {
-							$load_post = $post_parent3;
-						}
+						
 						$arg_child_post =  array(
 							'post_parent' 	=> $load_post,
 							'post_type'   	=> 'modules', 

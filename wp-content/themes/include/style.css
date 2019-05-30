@@ -38,7 +38,16 @@ body {
 	padding: 5px;
 	margin-bottom: 15px;
 }
-
+.header_module {
+	color: #fff;
+	font-size: 20px;
+    line-height: 25px;
+}
+.header_module:hover {
+	color: #fff;
+	font-size: 20px;
+    line-height: 25px;
+}
 .calendar_wrap table {
 	margin-top: 15px;
 	width: 100%;

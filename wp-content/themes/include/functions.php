@@ -259,11 +259,18 @@ function save_contact_form_data($cf7) {
 
 
 function load_progress_module($user, $post, $parent) {
-// 	$wpdb->insert( 'wp_progress_tracker', array(
-// 		'id' => null,
-// 		'userid' => $user, 
-// 		'moduleid' => $post, 
-// 		'parent_module' => $parent),
-// 	array( '%d', '%d', '%d', '%d') ;
-// );
+	global $wpdb;
+	$query = "SELECT count(*) as count FROM wp_progress_tracker WHERE userid=$user and moduleid=$post";
+
+	$result = $wpdb->get_results($query);
+	
+	if( 0 == $result[0]->count ) {
+		$wpdb->insert( 'wp_progress_tracker', array(
+			'id' => null,
+			'userid' => $user, 
+			'moduleid' => $post, 
+			'parent_module' => $parent),
+		array( '%d', '%d', '%d', '%d')
+	);
+	}
 }

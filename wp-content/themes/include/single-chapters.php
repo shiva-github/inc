@@ -14,6 +14,27 @@ get_header(); ?>
 			<div class="row">
 				<?php 
 				while (have_posts()) : the_post(); 
+
+					$mod_current = get_post_meta(get_the_ID(), 'parent_module', true);
+					//when user accessing page which has invalid url
+					if ($mod_current == '') {
+						echo "Something went wrong. Please avoid to access this page. Invalid page url.";die;
+					}
+					$load_post = $mod_current;
+
+					$post_parent1 = wp_get_post_parent_id(get_post($load_post)->ID);
+					$post_parent2 = wp_get_post_parent_id($post_parent1);
+					$post_parent3 = wp_get_post_parent_id($post_parent2);
+
+					if ( $post_parent1 ) {
+						$load_post = $post_parent1;
+					}
+					if ( $post_parent2 ) {
+						$load_post = $post_parent2;
+					}
+					if ( $post_parent3 ) {
+						$load_post = $post_parent3;
+					}
 					?>
 					<div class="col-md-4 left-panel-module">
 						<!-- listing of children posts here!!! -->
@@ -22,31 +43,13 @@ get_header(); ?>
 							</div>
 							<div class="w-50 float-left pl-2" >
 								<p style="margin-bottom: 0;">Your progress</p>
-								<p style="margin-bottom: 0;font-size: 40px;font-weight: 100;">20%</p>
+								<p style="margin-bottom: 0;font-size: 40px;font-weight: 100;" class="moduleNum" moduleNum="<?php echo $load_post; ?>">0%</p>
 								<p style="margin-bottom: 0;font-weight: 700">complete</p>
 							</div>
 						</div>
 						<?php 
 
-						$mod_current = get_post_meta(get_the_ID(), 'parent_module', true);
-						if ($mod_current == '') {
-							echo "Something went wrong. Please avoid to access this page.";die;
-						}
-						$load_post = $mod_current;
-
-						$post_parent1 = wp_get_post_parent_id(get_post($load_post)->ID);
-						$post_parent2 = wp_get_post_parent_id($post_parent1);
-						$post_parent3 = wp_get_post_parent_id($post_parent2);
-
-						if ( $post_parent1 ) {
-							$load_post = $post_parent1;
-						}
-						if ( $post_parent2 ) {
-							$load_post = $post_parent2;
-						}
-						if ( $post_parent3 ) {
-							$load_post = $post_parent3;
-						}
+						
 						
 						$arg_child_post =  array(
 							'post_parent' 	=> $load_post,

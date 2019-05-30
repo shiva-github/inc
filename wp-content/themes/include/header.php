@@ -14,7 +14,7 @@
 <body <?php body_class(); ?>>
 
   <?php 
-  if ( is_singular('modules')) {
+  if ( is_singular('modules') && is_user_logged_in() ) {
     $user = get_current_user_id();
 
     global $post;     // if outside the loop
@@ -22,11 +22,13 @@
     if ( is_singular('modules') && $post->post_parent ) {
     // This is a subpage
       $parent2 = get_post($post->post_parent)->post_parent;
-      if( $parent2 ){
+      if( $parent2 ) {
        echo $parent2;
+       $module_root = $parent2;
        // load_progress_module($user, $post->ID, $post->post_parent);
       } else {
         // echo $user, $post->ID, $post->post_parent;
+        $module_root = $post->post_parent;
         load_progress_module($user, $post->ID, $post->post_parent);
       }
     } else {
@@ -115,8 +117,13 @@
             
             <?php 
             if (is_user_logged_in()) {
+
+              if( is_singular('modules') ) {
             ?>
-            
+            <a class="header_module" href="<?php echo get_post_permalink($module_root);?>"><?php echo get_post($module_root)->post_title; ?> </a>
+            <?php 
+            }
+            ?>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#headerNav" aria-controls="headerNav" aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle navigation', 'best-reloaded' ); ?>">
                 <span class="navbar-toggler-icon"></span><span class="sr-only"><?php esc_html_e( 'Toggle Navigation', 'fire' ); ?></span>
             </button>
