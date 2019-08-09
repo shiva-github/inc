@@ -1,9 +1,9 @@
 jQuery(document).ready( function($) {
 	
-	$(".accordion-desc").slideUp("slow");
+	$(".accordion-desc").slideUp();
 	
 	$(".accordion-title").click(function(){
-		$(this).next().slideToggle("slow");
+		$(this).next().slideToggle();
 		$(this).parent().toggleClass('active');
       	});
 	$('#module-current').ready(function() {

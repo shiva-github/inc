@@ -2,6 +2,8 @@
 
 require_once 'class-wp-bootstrap-navwalker.php';
 require_once 'functions/module-ajax.php';
+require_once 'functions/forms_class.php';
+require_once 'functions/Form_structure.php';
 
 
 
@@ -274,3 +276,24 @@ function load_progress_module($user, $post, $parent) {
 	);
 	}
 }
+
+// $dbman = new dbmanager();
+// $data = array(
+// 	'col_1' => 'input_text',
+// 	'col_2' => 'input_number',
+// 	'col_3' => 'input_textarea' );
+// $dbman->table_create('test', $data);
+
+// $data = array(
+// 	'id'=> null,
+// 	'userid'=> 4,
+// 	'col_1' => 'input_text',
+// 	'col_2' => 1,
+// 	'col_3' => 'this is text area.',
+// 	'created_time' => '' . current_time( 'mysql' ),
+// 	'updated_time' => '' . current_time( 'mysql' )
+
+// 	 );
+
+// $dbman->insert_record('test', 4, $data);
+// $dbman->insert_record('{table name}', {userid}, {data send by user});
