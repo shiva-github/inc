@@ -49,8 +49,14 @@ get_header();
 							<a href="<?php echo get_permalink(); ?>" class="news-link">
 							<div class="module-listing-img">
 								<?php 
-								if( null != get_the_post_thumbnail_url() ):
-									echo the_post_thumbnail('small', array('class'=>' w-100 ')); 
+								$image = get_field('library_image');
+								$size = 'full'; // (thumbnail, medium, large, full or custom size)
+
+								if( $image ):
+									?>
+									<img src="<?php echo $image['url'];?>" alt="<?php echo $image['alt'];?>" class="img-responsive" width="100%" />
+									<?php
+									$image['url'];
 								else:
 									?>
 									<img src="<?php echo site_url();?>/wp-content/themes/include/assets/images/download.jpg" alt="Default News Image" class="img-responsive" width="100%" />

@@ -79,7 +79,12 @@ get_header(); ?>
 							$module_child_posts = get_children( $arg_child_post );
 							echo '<ul class="mb-2 clear-both">';
 							foreach ($module_child_posts as $value1) {
-								echo '<li class="clear-both pr-2 pt-2 pb-2 pl-4 btn-ajax" data="0" load="' . $value1->ID . '" ><a href="'.get_permalink($value1->ID).'">' .  $value1->post_title . '</a></li>';
+								$active_menu = '';
+								if($value->ID == $value1->ID ) {
+									$active_menu = 'current-menu';
+								}
+
+								echo '<li class="clear-both pr-2 pt-2 pb-2 pl-4 btn-ajax'. $active_menu .'" data="0" load="' . $value1->ID . '" ><a href="'.get_permalink($value1->ID).'">' .  $value1->post_title . '</a></li>';
 							}
 							echo '</ul>';
 							echo '</li>';

@@ -417,6 +417,7 @@ h3 {
 	padding-right: 0px;
 	text-align:right; 
 	padding-left: 0px;
+	padding-bottom: 30px;
 }
 .img-container right{
 	padding-top: 0px;
@@ -429,10 +430,23 @@ h3 {
     margin-bottom: 15px;
     margin-left: 0px;
 }
-.caption{
+.caption {
 	text-align: right;
 	display: table;
     width: 100%;
     position: relative;
     padding-bottom: 10px;
+}
+.popover-header {
+	background-color: #211261;
+    color: #fff;
+}
+.popover {
+	max-width: 500px;
+}
+.wrap {
+    margin-top: 0px;
+    margin-right: 25px;
+    margin-bottom: 0px;
+    margin-left: 25px;
 }
