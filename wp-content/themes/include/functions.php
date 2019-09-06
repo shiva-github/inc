@@ -270,11 +270,13 @@ function save_contact_form_data($cf7) {
 
 function load_progress_module($user, $post, $parent) {
 	global $wpdb;
+
 	$query = "SELECT count(*) as count FROM wp_progress_tracker WHERE userid=$user and moduleid=$post";
 
 	$result = $wpdb->get_results($query);
 	
 	if( 0 == $result[0]->count ) {
+
 		$wpdb->insert( 'wp_progress_tracker', array(
 			'id' => null,
 			'userid' => $user, 
@@ -282,6 +284,7 @@ function load_progress_module($user, $post, $parent) {
 			'parent_module' => $parent),
 		array( '%d', '%d', '%d', '%d')
 	);
+	
 	}
 }
 

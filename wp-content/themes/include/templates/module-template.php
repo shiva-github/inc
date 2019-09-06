@@ -50,13 +50,12 @@ get_header();
 							<div class="module-listing-img">
 								<?php 
 								$image = get_field('library_image');
-								$size = 'full'; // (thumbnail, medium, large, full or custom size)
-
+								$size = 'full'; // (thumbnail, medium, large, full or custom size)								
 								if( $image ):
 									?>
-									<img src="<?php echo $image['url'];?>" alt="<?php echo $image['alt'];?>" class="img-responsive" width="100%" />
+									<!-- <img src="<?php //echo $image['url'];?>" alt="<?php //echo $image['alt'];?>" class="img-responsive" width="100%" /> -->
+									<img src="<?php echo $image; ?>" alt="Image for Module" class="img-responsive" width="100%" />
 									<?php
-									$image['url'];
 								else:
 									?>
 									<img src="<?php echo site_url();?>/wp-content/themes/include/assets/images/download.jpg" alt="Default News Image" class="img-responsive" width="100%" />
@@ -72,7 +71,7 @@ get_header();
 								<div class="w-25 float-left text-center"><img src="<?php echo site_url();?>/wp-content/themes/include/assets/images/grey.jpg" style="border-radius: 50%;width: 75px;height: 75px;">
 									<p class="mt-2 moduleNum" moduleNum="<?php echo get_the_ID(); ?>">0%</p>
 								</div>
-								<div class="pl-3 pr-3 w-75 float-left"><?php echo the_content(); ?></div>
+								<div class="pl-3 pr-3 w-75 float-left"><?php echo the_excerpt(); ?></div>
 							</div>
 							</a>
 						</div>

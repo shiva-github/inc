@@ -35,6 +35,7 @@ get_header(); ?>
 					if ( $post_parent3 ) {
 						$load_post = $post_parent3;
 					}
+
 					?>
 					<div class="col-md-4 left-panel-module">
 						<!-- listing of children posts here!!! -->
@@ -75,14 +76,13 @@ get_header(); ?>
 								'orderby'		=>'menu_order', 
 								'order'   		=> 'ASC',
 							);
-							echo '<li class="clear-both pr-2 pt-2 pb-2 pl-4 btn-ajax" data="0" load="' . $value->ID . '" ><a href="'.get_permalink($value->ID).'">' .  $value->post_title . '</a>';
+							$active_l1 = ($value->ID == $mod_current)? "current-menu active": '';
+
+							echo '<li class="clear-both'. $active_l1 . '" data="0" load="' . $value->ID . '" ><a href="'.get_permalink($value->ID).'" class="modules-submenu">' .  $value->post_title . '</a>';
 							$module_child_posts = get_children( $arg_child_post );
 							echo '<ul class="mb-2 clear-both">';
 							foreach ($module_child_posts as $value1) {
-								$active_menu = '';
-								if($value->ID == $value1->ID ) {
-									$active_menu = 'current-menu';
-								}
+								$active_l2 = ($value1->ID == $mod_current)? "current-menu active": '';
 
 								echo '<li class="clear-both pr-2 pt-2 pb-2 pl-4 btn-ajax'. $active_menu .'" data="0" load="' . $value1->ID . '" ><a href="'.get_permalink($value1->ID).'">' .  $value1->post_title . '</a></li>';
 							}

@@ -200,15 +200,7 @@ a.learn-more {
 
 }
 .accordian-keyconcept{
-	background-color: #cfcfcf;
-	color: #428bca;
-	padding: 10px 15px;
-	font-weight: 600;
-	display: block;
-	border-radius: 4px;
-	margin: 10px 0px;
 	margin-left: 60px;
-	width: 100%;
 }
 .home .mainpage .page-title{
 	font-size: 34px;
@@ -344,7 +336,7 @@ body.single-modules {
 	width: 100%;
 	color: #333;
 }
-#module-current li.current-menu > a{
+#module-current > li.current-menu > a, #module-current > li.active > a {
 	font-size: 16px !important;
 	line-height: 20px !important;
 	background-color: #005b79;
@@ -353,6 +345,10 @@ body.single-modules {
 	font-weight: bold;
 	display: block;
 	width: 100%;
+}
+#module-current > li.active .current-menu .modules-submenu {
+	color: #005b79 !important;
+	font-weight: bold;
 }
 .health-box {
 	min-height: 250px;
@@ -384,13 +380,18 @@ body.single-modules {
 	margin-bottom: 20px;
 }
 .accordion-title {
-	background-color: #efefef;
-	padding: 15px 20px;
-	color: #333;
 	font-weight: bold;
 	cursor: pointer;
-	font-size: 20px;
-	line-height: 30px;
+
+	background-color: #cfcfcf;
+	color: #428bca;
+	padding: 10px 15px;
+	font-weight: 600;
+	display: block;
+	border-radius: 4px;
+	margin: 10px 0px;
+	/*margin-left: 60px;*/
+	width: 100%;
 }
 .accordion-desc .tab-pane {
 	padding: 20px 5px 20px 40px;
@@ -449,4 +450,59 @@ h3 {
     margin-right: 25px;
     margin-bottom: 0px;
     margin-left: 25px;
+}
+.border-custom {
+  border: 1px solid #E1E1E1;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding-top: 20px;
+  padding-bottom:20px;
+  padding-left:20px;
+  padding-right:20px;
+  box-sizing: border-box;
+}
+.module-1, .module-2, .module-3, .module-4, .module-5, .module-6, .module-7, .module-8 {
+	margin-top: 25px;
+}
+.box-image {
+	position:absolute;
+    bottom: 0;
+    right: 15px;
+}
+.info-box {
+	padding: 10px;
+    border: 1px solid #ccc;
+    margin: 10px 0px;
+    background-color: #efefef;
+}
+.reflect-now {
+	min-height: 200px;
+}
+.reflect-now img{
+	position: absolute;
+    bottom: 0px;
+    right: 15px;
+}
+.cbr-in-action img {
+	float: left;
+}
+.cbr-in-action p {
+	display: none;
+}
+.cbr-in-action .cbr-div {
+	float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #004c98;
+    margin-left: 20px;
+    text-align: center;
+    color: #fff;
+}
+#relectnow-modal .modal-header .close, #relectnow-modal .modal-header .close:hover {
+	color: #000 !important;
+	background-color: #fff;
+}
+.caption-health-promotion{
+	width:450px;
 }
