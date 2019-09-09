@@ -166,6 +166,46 @@ function add_columns( $columns ) {
 }
 
 
+// adding module parent column for reference
+add_filter( 'manage_edit-chapters_columns', 'add_columns_chapters' );
+/**
+ * Add columns to management page
+ *
+ * @param array $columns
+ *
+ * @return array
+ */
+function add_columns_chapters( $columns ) {
+	$columns['chapter_module'] = 'Parent Module';
+	return $columns;
+}
+
+
+// adding data to chapter parent coulumn
+add_action( 'manage_chapters_posts_custom_column', 'columns_content_chapters', 10, 2 );
+
+/**
+ * Set content for columns in management page
+ *
+ * @param string $column_name
+ * @param int $post_id
+ *
+ * @return void
+ */
+function columns_content_chapters( $column_name, $post_id ) {
+	if ( 'chapter_module' != $column_name ) {
+		return;
+	}
+	$postid = get_post($post_id)->parent_module;
+	$parent = wp_get_post_parent_id($postid);
+	echo '[' . get_post($parent)->post_title . ']' . '-'.get_post($postid)->post_title;
+		
+}
+
+
+
+
+
 
 // adding data to module parent coulumn
 add_action( 'manage_modules_posts_custom_column', 'columns_content', 10, 2 );
