@@ -21,7 +21,7 @@ class dbmanager
 
 		$sql1 = "CREATE TABLE IF NOT EXISTS `$table_name` (
 		id mediumint(9) NOT NULL AUTO_INCREMENT,
-		userid mediumint(9),";
+		";
 		$sql2 = '';
 		foreach ($create_table as $key => $value) {
 			if($value == 'input_text') {
@@ -53,21 +53,22 @@ class dbmanager
 	function insert_record($table, $user, $data) {
 		global $wpdb;
 		$table = $wpdb->prefix . $table;
-		$var = $wpdb->get_var( "SELECT COUNT(*) FROM $table where userid=$user;" );
-		
+		$var = $wpdb->get_var("SELECT COUNT(*) FROM $table where LoggedUserId=$user;");
+
 		if ( 0 != $var ) {
-			echo 1;
-  			var_dump($var);die;
-			return true;
+				$wpdb->update( 
+				    $table, 
+				    $data, 
+				    array( 'LoggedUserId' => $user )
+				);
 		} else {
-			echo 2;
 			$wpdb->insert( 
 				$table, 
 				$data
 			);
-  			var_dump($var);die;
-			return false;
 		}
+		
+		return false;
 	}
 }
 
