@@ -289,21 +289,70 @@ function remove_admin_bar() {
 }
 
 
+
+
+
+
+
 add_action("wpcf7_before_send_mail", "save_contact_form_data");  
 function save_contact_form_data($cf7) {
     // get the contact form object
-    // $wpcf = WPCF7_ContactForm::get_current();
+    $title = strtolower($cf7->title);
+    $wpcf = WPCF7_ContactForm::get_current();
 	$submission = WPCF7_Submission::get_instance();
-	$text_area_contents = $cf7->posted_data;
+	//$text_area_contents = $wpcf7->get_posted_data();
 	// print_r($submission);die;
-	print_r($cf7->raw_values);die;
-    // if you wanna check the ID of the Form $wpcf->id
+	$input_values = $submission->get_posted_data();
+	$table_name = preg_replace('/[^a-zA-Z0-9_.]/', '_', $title);
+	
+	unset($input_values['_wpcf7_version']);
+	unset($input_values['_wpcf7_locale']);
+	unset($input_values['_wpcf7_unit_tag']);
+	unset($input_values['g-recaptcha-response']);
+	unset($input_values['_wpcf7_container_post']);
+	
+	
+	$data = array();
+	$table_cols = array();
+	$user_login = 0;
+	foreach ($input_values as $key => $value) {
+		//create table functionality here--------------------------------------------------
+		if (strpos($key, 'textarea') !== false) {
+			$table_cols[preg_replace('/[^a-zA-Z0-9_.]/', '_', $key)] = 'input_textarea';
+			$data[preg_replace('/[^a-zA-Z0-9_.]/', '_', $key)] = htmlspecialchars($value);
+		}
 
+		if (strpos($key, 'input') !== false) {
+			$table_cols[preg_replace('/[^a-zA-Z0-9_.]/', '_', $key)] = 'input_text';
+			$data[preg_replace('/[^a-zA-Z0-9_.]/', '_', $key)] = $value;
+		}
+
+
+		if (strpos($key, 'LoggedUserId') !== false) {
+			$table_cols[preg_replace('/[^a-zA-Z0-9_.]/', '_', $key)] = 'input_number';
+			$data[preg_replace('/[^a-zA-Z0-9_.]/', '_', $key)] = $value;
+			$user_login = $value;
+		}
+		//create table functionality end--------------------------------------------------
+		
+		//Insert functionality start--------------------------------------------------
+		//Insert functionality end--------------------------------------------------
+	}
+	$dbman = new dbmanager();
+	$dbman->table_create($table_name, $table_cols);
+	$data['updated_time'] = '' . current_time( 'mysql' );
+	$data['created_time'] = '' . current_time( 'mysql' );
+	
+	// $dbman->insert_record('{table name}', {userid}, {data send by user});
+	$test = $dbman->insert_record($table_name, $user_login, $data);
+	
+	//working posted data content here
+	// print_r($submission->get_posted_data());die;
+    // if you wanna check the ID of the Form $wpcf->id
     // if (/*Perform check here*/) {
     //     // If you want to skip mailing the data, you can do it...  
     //     $wpcf->skip_mail = true;    
     // }
-
 	return $wpcf;
 }
 

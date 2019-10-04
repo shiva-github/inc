@@ -165,6 +165,7 @@ body {
 	color: #fff !important;
 	background-color: #004c98;
 	font-size: 16px;
+	cursor: pointer;
 }
 a.learn-more {
 	padding: 5px 25px;
