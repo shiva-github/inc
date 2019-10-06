@@ -23,4 +23,5 @@ jQuery(document).ready( function($) {
 	jQuery.noConflict();
 	jQuery('[data-toggle="popover"]').popover();
 
+	
 }); 

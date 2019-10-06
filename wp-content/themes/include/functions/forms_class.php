@@ -46,8 +46,9 @@ class dbmanager
 	function insert_record($table, $user, $data) {
 		global $wpdb;
 		$table = $wpdb->prefix . $table;
-
+		$var = $wpdb->get_var("SELECT COUNT(*) FROM $table where LoggedUserId=$user;");
 		if ( 0 != $var ) {
+			unset($data['created_time']);
 				$wpdb->update( 
 				    $table, 
 				    $data, 
@@ -61,6 +62,17 @@ class dbmanager
 		}
 		
 		return false;
+	}
+
+
+
+	function fetch_form_data_from_table($table, $userid) {
+		global $wpdb;
+		$table = $wpdb->prefix . $table;
+
+		$res = $wpdb->get_results( 'SELECT * FROM ' . $table . ' WHERE LoggedUserId=' . $userid );
+		
+		return $res;
 	}
 }
 

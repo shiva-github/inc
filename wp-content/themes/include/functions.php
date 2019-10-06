@@ -14,7 +14,8 @@ function fire_theme_enqueue_scripts() {
 
 
     // all scripts
-
+	// wp_localize_script( 'ajax-script', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
+	
 
 	wp_enqueue_script( 'popper', get_template_directory_uri() . '/assets/js/popper.min.js', array('jquery'), '20120206', true );
 	
@@ -23,6 +24,15 @@ function fire_theme_enqueue_scripts() {
 
 
 	wp_enqueue_script( 'theme-script', get_template_directory_uri() . '/assets/js/script.js', array('jquery'), '20120206', true );
+
+	if ( ! is_user_logged_in() ) {
+		return;
+	}
+
+	wp_enqueue_script( 'ajax-script', get_template_directory_uri() . '/assets/js/ajax-script-admin.js', array('jquery'), '20120206', true );
+	// wp_enqueue_script('ajax-script');
+
+	wp_localize_script( 'ajax-script', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 
 }
 add_action( 'wp_enqueue_scripts', 'fire_theme_enqueue_scripts' );
@@ -389,3 +399,76 @@ function load_progress_module($user, $post, $parent) {
 }
 
 // $dbman->insert_record('{table name}', {userid}, {data send by user});
+
+// add_action( 'wp_enqueue_scripts','ajax_login_init' );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Not working code
+// add_action( 'wp_ajax_nopriv_ajaxlogin','ajax_login' );
+
+// function ajax_login(){
+//   //nonce-field is created on page
+//   check_ajax_referer('ajax-login-nonce','security');
+//   //CODE
+//   die();
+// }
+
+
+// // ajax call for getting form data
+add_action( 'wp_ajax_form_data_fetch', 'form_data_fetch' );
+
+function form_data_fetch() {
+
+
+	$form_data = htmlspecialchars($_POST['form_data']);
+	$form_id = intval(substr($form_data, strripos($form_data, '-')+1));
+	
+	$userid = intval($_POST['name_id']);
+	
+	$args = array('post_type' => 'wpcf7_contact_form', 'posts_per_page' => -1);
+	$cf7Forms = get_post( $form_id, $args );
+	$title = strtolower($cf7Forms->post_title);
+	$table_name = preg_replace('/[^a-zA-Z0-9_.]/', '_', $title);
+	
+	$dbman = new dbmanager();
+	$json_data = $dbman->fetch_form_data_from_table($table_name, $userid);
+	if (count($json_data) == 0) {
+		echo json_encode('{success: "No saved data for user.", code:1}');
+	} else {
+		$json_data['success'] = $json_data[0];
+		unset($json_data[0]);
+		$json_data['code'] = 2;
+		echo json_encode($json_data);
+	}
+	//fetch_form_data_from_table($table_name, $userid)
+	wp_die();
+  	
+}
