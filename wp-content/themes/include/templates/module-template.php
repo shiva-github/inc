@@ -32,12 +32,16 @@ get_header();
 				$args = array(
 					'post_type'   => 'modules',
 					'post_status' => 'publish',
-					'orderby' => 'meta_value',
+					'orderby' => 'menu_order',
 					'order' => 'ASC',
-					 'post_parent' => 0,
+					'post_parent' => 0,
 				);
 				$module_listing = new WP_Query( $args );
-				
+				?>
+				<!-- <pre>
+					<?php //var_dump($module_listing); ?>
+				</pre> -->
+				<?php
 				if( $module_listing->have_posts() ) :
 					$counter = 0;
 					while( $module_listing->have_posts() ):
