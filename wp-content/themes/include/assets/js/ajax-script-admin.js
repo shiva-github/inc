@@ -16,7 +16,21 @@ jQuery(document).ready( function($) {
 			data: formData,
 			method: "POST",
 			success: function(result) {
-				console.log(JSON.parse(result));
+				var complete_obj = JSON.parse(result);
+				// console.log(complete_obj);
+				delete(complete_obj['success']["id"]);
+				delete(complete_obj['success']["LoggedUserId"]);
+				delete(complete_obj['success']["created_time"]);
+				delete(complete_obj['success']["updated_time"]);
+				for(var key in complete_obj['success']) {
+
+					console.log(complete_obj['success'][key]);
+					// console.log('input[name="'+key.replace(/_/g, '-')+'"]');
+					jQuery('[name="'+key.replace(/_/g, '-')+'"]').val(complete_obj['success'][key]);
+
+					// $()
+					//console.log(complete_obj['success'][key]);
+				}
 			}
 		});
 		
