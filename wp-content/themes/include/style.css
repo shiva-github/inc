@@ -507,3 +507,22 @@ h3 {
 .caption-health-promotion{
 	width:450px;
 }
+input[type="checkbox"] + span {
+	display: inline-block;
+    width: calc(100% - 25px);
+    vertical-align: top;
+    margin-left: 5px;
+}
+.my-plan-page > .accordion > .accordion-title {
+	background-color: #efefef;
+	color: #333;
+	font-weight: bold;
+	font-size: 20px;
+}
+.my-plan-page > .accordion > .accordion-desc > .sub-accordion > .accordion-title {
+	background-color: #efefef;
+    color: #333;
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 5px;
+}

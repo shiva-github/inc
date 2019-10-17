@@ -80,7 +80,7 @@ get_header(); ?>
 						</ul>
 					</div>
 					<div class="col-md-8 right-panel-module">
-						<div class="content-module" id="page-content" style="padding-top: 55px;">
+						<div class="content-module pl-2 pr-2 pb-2" id="page-content" style="padding-top: 55px;">
 							<h2><?php the_title(); ?></h2>
 							<p><?php the_content(); ?></p>
 							<div class="content-navigate-module text-center">
