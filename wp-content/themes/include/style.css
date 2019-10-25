@@ -151,8 +151,8 @@ body {
 	color: #f00;
 }
 
-.mainpage #searchsubmit, button, [type="submit"] {
-	padding: 0px 25px;
+.mainpage #searchsubmit, button:not([data-dismiss="alert"]), [type="submit"] {
+	padding: 0px 20px;
 	font-weight: 800;
 	border-radius: 3px;
 	height: 40px;
@@ -164,7 +164,7 @@ body {
 	line-height: 30px;
 	color: #fff !important;
 	background-color: #004c98;
-	font-size: 16px;
+	font-size: 15px;
 	cursor: pointer;
 }
 a.learn-more {
@@ -186,7 +186,7 @@ a.learn-more {
 .mainpage h2 {
 	font-weight: lighter;
 }
-.mainpage #searchsubmit:hover, button:hover {
+.mainpage #searchsubmit:hover, button:not([data-dismiss="alert"]):hover {
 	background-color: #525455;
 }
 .error404 .mainpage {
@@ -526,3 +526,172 @@ input[type="checkbox"] + span {
     margin-top: 0;
     margin-bottom: 5px;
 }
+body:not(.page-template-post) .category-listing li:first-child:before {
+	content: "\00BB";
+}
+body:not(.page-template-post) .category-listing li:first-child,
+body:not(.page-template-post) .category-listing li:first-child a {
+	background-color: #004c89;
+	color: #fff;
+	font-weight: bold;
+}
+.category-listing {
+	list-style: none;
+    padding: 0px;
+}
+.category-listing li {
+	font-size: 16px;
+    width: 100%;
+    padding: 10px;
+    background-color: #efefef;
+    margin-bottom: 1px;
+    font-weight: lighter;
+}
+.conversation-pg .mainpage {
+	font-weight: lighter;
+}
+.conversation-table {
+	font-size: 14px;
+}
+.conversation-table td a {
+	color: #000;
+	text-decoration: none;
+}
+.conversation-table td {
+	border-bottom: 15px solid #fff;
+}
+.conversation-table tr {
+	border-left: 10px solid #ccc;
+}
+.pagination-nav {
+	text-align: center;
+}
+.category-listing a:active,
+.category-listing a:visited,
+.category-listing a {
+	color: #000;
+	text-decoration: none;
+}
+.category-listing .active {
+	font-weight: bold;
+} 
+.pagination-nav li {
+    display: inline;
+}
+ 
+.pagination-nav li a,
+.pagination-nav li a:hover,
+.pagination-nav li.active a,
+.pagination-nav li.disabled {
+    background-color: #efefef;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    padding: 1px 10px;
+    color: #000;
+    text-decoration:none;
+}
+
+.pagination-nav li.active a {
+    background-color: #004c98;
+    color: #fff;
+}
+.comment-reply-title {
+	font-size: 16px;
+}
+.right-section-wrapper {
+	border-left: 5px solid #ccc;
+    font-weight: lighter;
+    background-color: #e6e6e6;
+    margin-bottom: 15px;
+    padding: 10px;
+}
+.comment {
+	list-style: none;
+    background-color: #e6e6e6;
+    margin-bottom: 15px;
+    padding: 10px;
+}
+.timeline { 
+	position: relative;
+    width: 805px;
+    height: 375px;
+    margin: 20px auto;
+    background-image: url(http://include.xyz/wp-content/uploads/2019/10/timeline1.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+}
+
+.timeline ul li h3 {
+    position: absolute !important;
+    clip: rect(1px 1px 1px 1px);
+    /* clip: rect(1px, 1px, 1px, 1px); */
+    overflow: hidden;
+    height: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+
+ .timeline ul li#y-1978 {
+    top: 150px;
+    left: 0;   width: 100px;
+    height: 60px;
+}
+.timeline ul li#y-2004 {
+    top: 255px;
+    left: 285px;   
+    width: 160px;
+    height: 90px;
+}
+
+.timeline ul li#y-2006 {
+    top: 145px;
+    left: 400px;
+    width: 90px;
+    height: 65px;
+}
+
+
+.timeline ul li#y-2010 {
+    top: 150px;
+    left: 535px;
+    width: 110px;
+    height: 90px;
+}
+
+.timeline ul li#y-2012 {
+    top: 255px;
+    left: 615px;
+    width: 110px;
+    height: 115px;
+}
+
+.timeline ul li#y-2014 {
+    top: 150px;
+    left: 675px;
+    width: 130px;
+    height: 90px;
+}
+.required-field {
+	color: #f00;
+}
+@media (min-width: 320px) and (max-width: 767px) {
+	body.single-modules {
+		padding-bottom: 0px;
+	}
+	footer {
+		position: static;
+	}
+	#menu-header {
+		width: 100%;		
+	}
+	button.navbar-toggler, button.navbar-toggler:focus {
+		background-color: #ddd;
+		z-index: 1;
+		position: relative;
+		margin-right: 10px;
+	}
+	.background-header .menu-item:not(:last-child) {
+		border-bottom: 1px solid #fff;
+	}
+} 

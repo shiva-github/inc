@@ -1,5 +1,5 @@
 jQuery(document).ready( function($) {
-	jQuery('.form-load-js').click(function(){
+	jQuery('.formLoadJs, .form-load-js').click(function(){
 		var tab_text = $(this).attr('href');
 
 		var tab_id = tab_text.substring( tab_text.lastIndexOf('-')+1, tab_text.length);
@@ -24,7 +24,7 @@ jQuery(document).ready( function($) {
 				delete(complete_obj['success']["updated_time"]);
 				for(var key in complete_obj['success']) {
 
-					console.log(complete_obj['success'][key]);
+					// console.log(complete_obj['success'][key]);
 					// console.log('input[name="'+key.replace(/_/g, '-')+'"]');
 					jQuery('[name="'+key.replace(/_/g, '-')+'"]').val(complete_obj['success'][key]);
 

@@ -54,6 +54,7 @@ class dbmanager
 				    $data, 
 				    array( 'LoggedUserId' => $user )
 				);
+				
 		} else {
 			$wpdb->insert( 
 				$table, 

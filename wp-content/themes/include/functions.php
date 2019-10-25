@@ -209,7 +209,7 @@ function columns_content_chapters( $column_name, $post_id ) {
 	$postid = get_post($post_id)->parent_module;
 	$parent = wp_get_post_parent_id($postid);
 	echo '[' . get_post($parent)->post_title . ']' . '-'.get_post($postid)->post_title;
-		
+
 }
 
 
@@ -302,8 +302,10 @@ function remove_admin_bar() {
 add_action("wpcf7_before_send_mail", "save_contact_form_data");  
 function save_contact_form_data($cf7) {
     // get the contact form object
-    $title = strtolower($cf7->title);
-    $wpcf = WPCF7_ContactForm::get_current();
+
+	
+	$title = strtolower($cf7->title);
+	$wpcf = WPCF7_ContactForm::get_current();
 	$submission = WPCF7_Submission::get_instance();
 	//$text_area_contents = $wpcf7->get_posted_data();
 	// print_r($submission);die;
@@ -394,7 +396,7 @@ function load_progress_module($user, $post, $parent) {
 			'parent_module' => $parent),
 		array( '%d', '%d', '%d', '%d')
 	);
-	
+
 	}
 }
 
@@ -447,7 +449,6 @@ add_action( 'wp_ajax_form_data_fetch', 'form_data_fetch' );
 
 function form_data_fetch() {
 
-
 	$form_data = htmlspecialchars($_POST['form_data']);
 	$form_id = intval(substr($form_data, strripos($form_data, '-')+1));
 	
@@ -469,6 +470,68 @@ function form_data_fetch() {
 		echo json_encode($json_data);
 	}
 	//fetch_form_data_from_table($table_name, $userid)
-	wp_die();
-  	
+	wp_die(); 	
 }
+
+// Add fields after default fields above the comment box, always visible
+
+add_action( 'comment_form_logged_in_after', 'additional_fields' );
+add_action( 'comment_form_after_fields', 'additional_fields' );
+
+function additional_fields () {
+	echo '<p class="comment-form-comment"><label for="subject">' . _x( 'Subject', 'noun' ) .
+	'</label><br><input type="text" id="subject" class="w-100" name="subject" aria-required="true">' .
+	'</p>';
+
+}
+
+// Save the comment meta data along with comment
+
+add_action( 'comment_post', 'save_comment_meta_data' );
+function save_comment_meta_data( $comment_id ) {
+	
+	if ( ( isset( $_POST['subject'] ) ) && ( $_POST['subject'] != '') )
+		$subject = wp_filter_nohtml_kses($_POST['subject']);
+	add_comment_meta( $comment_id, 'subject', $subject );
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+function format_comment($comment, $args, $depth) {
+
+	$GLOBALS['comment'] = $comment; ?>
+
+	<div <?php comment_class(); ?> id="li-comment-<?php comment_ID() ?>">
+		<div class="row">
+			<div class="col-md-3">
+				<p class="mb-1"><?php echo get_comment_author(); ?></p>
+				<p>
+					<?php printf(__('%1$s'), get_comment_date(), get_comment_time()) ?>
+
+				</p>
+			</div>
+			<div class="col-md-9">
+				<p><?php echo get_comment_meta(get_comment_ID(), 'subject')[0]; ?></p>
+				<p><?php comment_text(); ?></p>
+			</div>
+		</div>
+
+		<?php if ($comment->comment_approved == '0') : ?>
+			<em><?php _e('Your comment is awaiting moderation.') ?></em><br />
+		<?php endif; ?>
+
+
+	</div>
+
+	<?php } ?>

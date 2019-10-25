@@ -24,10 +24,10 @@
 define('DB_NAME', 'include5');
 
 /** MySQL database username */
-define('DB_USER', 'shiva');
+define('DB_USER', 'root');
 
 /** MySQL database password */
-define('DB_PASSWORD', 'test@123');
+define('DB_PASSWORD', '');
 
 /** MySQL hostname */
 define('DB_HOST', 'localhost');
@@ -78,7 +78,7 @@ $table_prefix  = 'wp_';
  *
  * @link https://codex.wordpress.org/Debugging_in_WordPress
  */
-define('WP_DEBUG', true);
+define('WP_DEBUG', false);
 
 /* That's all, stop editing! Happy blogging. */
 
