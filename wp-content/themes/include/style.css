@@ -712,9 +712,10 @@ span.wpcf7-list-item {
 
 
  .stakeholder-form .rTableCell, .stakeholder-form .rTableHead{width:16.16%;}
-.identity-form .rTableCell {width:50%;}
+.identity-form .rTableCell .rTableHead {width:50%;}
 .training-form .rTableCell .rTableHead {width:20%;}
-.formal-form .rTableCell {width:25%;}
+.formal-form .rTableCell .rTableHead {width:25%;}
+.after {width:33.33%;}
 .after-form .rTableCell .rTableHead {width:33.33%;}
 .after-form textarea, .after-form input[type="text"]{width:auto;}
 .rTableRow:nth-child(even){background-color:#f5f5f5;}
