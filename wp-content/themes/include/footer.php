@@ -48,6 +48,14 @@
 </footer>
 
 
+<script type="text/javascript">
+var _userway_config = {
+account: 'lHje2eWI6T'
+};
+</script>
+<script type="text/javascript" src="https://cdn.userway.org/widget.js"></script>
+
+
 <?php wp_footer(); ?>
 </body>
 </html>

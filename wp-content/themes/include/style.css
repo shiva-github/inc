@@ -143,7 +143,7 @@ body {
 	letter-spacing: 2px;
 	border: 1px solid #ddd;
 	text-decoration: none;
-	line-height: 30px;
+	line-height: 38px;
 	font-size: 16px;
 	width: 98%;
     margin: 2%;
@@ -709,11 +709,56 @@ span.wpcf7-list-item {
     margin: 0 0 0 1em;
     width: 100%;
 }
+.modal-header {
+	  border-bottom: none;
+	  padding: 0;
+      padding-left: 12px;
 
+}
+.modal-content {
+	padding: 15px;
+    width: fit-content;
+}
+.modal-title {
+	font-size: 125%;
+}
+.panel-form {
+ margin-top: 105px; 
+ height: 560px; 
+ width: 920px; 
+ border: 1px solid #ccc; 
+ overflow: auto; 
+ margin-left: -69px;
+}
+
+.userway-spacer {
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;  
+}
+
+
+body .userway .userway_accessibility_icon .userway-spacer {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    bottom: -10px;
+    left: -10px;
+    display: inline-block;
+}
+
+html body .userway .userway_accessibility_icon .userway-spacer {
+  background-color: rgba( 0, 0, 0,0.67)!important;
+  z-index: -1;
+}
+
+html body .userway .userway_accessibility_icon {
+  background: transparent!important;
+}
 
  .stakeholder-form .rTableCell, .stakeholder-form .rTableHead{width:16.16%;}
 .identity-form .rTableCell .rTableHead {width:50%;}
 .training-form .rTableCell .rTableHead {width:20%;}
+.training {width:20%;}
 .formal-form .rTableCell .rTableHead {width:25%;}
 .after {width:33.33%;}
 .after-form .rTableCell .rTableHead {width:33.33%;}
@@ -781,4 +826,11 @@ span.wpcf7-list-item {
 .custom-text {
 	width:33.33%;
 	float:left;
+}
+.row.logo-header-text {
+	padding-top: 25px;
+	padding-bottom: 15px;
+}
+.introduction-img {
+	margin-right:100px;
 }
