@@ -523,9 +523,44 @@ h3 {
     text-align: center;
     color: #fff;
 }
+.cbr-modal-header {
+    top: -15px;
+    width: 100px;
+    text-align: center;
+position: relative;
+    background-color: #004c98;
+    margin-left: 12px;
+    color: #fff;
+}
+.cbr-logo-modal {
+padding-top: 10px;
+padding-bottom: 20px;
+margin-bottom: 0px;
+width: 100%;
+font-size: 16px;
+}
+.cbr-modal-header span {
+width: 100%;
+float: left;
+text-align: center;
+}
 #relectnow-modal .modal-header .close, #relectnow-modal .modal-header .close:hover {
+    height: 20px !important;
+    border-radius: 10px;
+    opacity: 1;
+    text-shadow: none;
+    width: 20px !important;
+    font-size: 20px;
+    line-height: 15px;
+    text-align: center;
+    font-weight: 700;
+    padding: 0px !important;
+    z-index: 10;
 	color: #000 !important;
-	background-color: #fff;
+    background-color: #fff;
+    position: absolute;
+    right: 15px;
+    top: 10px;
 }
 .caption-health-promotion{
 	width:450px;
@@ -754,6 +789,9 @@ html body .userway .userway_accessibility_icon .userway-spacer {
 html body .userway .userway_accessibility_icon {
   background: transparent!important;
 }
+.dex-img {
+	float:right;
+}
 
  .stakeholder-form .rTableCell, .stakeholder-form .rTableHead{width:16.16%;}
 .identity-form .rTableCell .rTableHead {width:50%;}
@@ -822,6 +860,39 @@ html body .userway .userway_accessibility_icon {
 		margin-top: -6%;
 	}
 	.wp-custom-logo img.custom-logo {float: none;}
+	.intro-img {
+	padding:12px;
+}
+.intro-pic {
+	padding-right:110px;
+}
+	.disability-img {
+			padding-right:140px;
+
+	}
+ .box-text {
+		    margin-left: -14px;
+            margin-bottom: -14px;
+	}
+	.book-img {
+		width:100%;
+	}
+	.human-img {
+		margin-right:145px;
+	}
+	.guide-img {
+		margin-right:125px;
+	}
+	.conclusion-img {
+		margin-right:35%;
+	}
+	.refect-width {
+		width:115%;
+	}
+	.mob-img {
+		float:none;
+		width:100%;
+	}
 } 
 .custom-text {
 	width:33.33%;
@@ -833,4 +904,12 @@ html body .userway .userway_accessibility_icon {
 }
 .introduction-img {
 	margin-right:100px;
+}
+.video-dec {
+	width:801px;
+	height:450px;
+}
+.table-new {
+	background-color:#005b79;
+	color:white;
 }

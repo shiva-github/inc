@@ -2,7 +2,13 @@
 	<div class="modal fade" id="relectnow-modal">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
-
+				<!-- CBR Modal Header -->
+				<div class="cbr-modal-header" id="modal-cbr">
+					<h3 class="cbr-logo-modal float-left">
+						<span class="cbr-modal">CBR</span>
+						<span class="in-action-modal">in action</span>
+					</h3>
+				</div>
 				<!-- Modal Header -->
 				<div class="modal-header">
 					<h4 class="modal-title font-weight-bold" id="modal-title"></h4>

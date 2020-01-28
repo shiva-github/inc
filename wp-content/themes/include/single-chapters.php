@@ -22,7 +22,7 @@ get_header(); ?>
 					}
 					$load_post = $mod_current;
 
-					$post_parent1 = wp_get_post_parent_id(get_post($load_post)->ID);
+					$post_parent1 = wp_get_post_parent_id($load_post);
 					$post_parent2 = wp_get_post_parent_id($post_parent1);
 					$post_parent3 = wp_get_post_parent_id($post_parent2);
 
@@ -64,7 +64,7 @@ get_header(); ?>
 						$current_module_child_posts = get_children( $arg_child_post );
 						?>
 
-						<ul class="clear-both" id="module-current" parent-mod="<?php echo $load_post; ?>">
+						<ul class="clear-both" id="module-current" parent="<?php echo $mod_current ?>">
 							<?php
 						foreach ($current_module_child_posts as $value) {
 							
@@ -76,17 +76,19 @@ get_header(); ?>
 								'orderby'		=>'menu_order', 
 								'order'   		=> 'ASC',
 							);
-							$active_l1 = ($value->ID == $mod_current)? "current-menu active": '';
+							$active = $mod_current == $value->ID ? ' current-menu ': '';
 
-							echo '<li class="clear-both'. $active_l1 . '" data="0" load="' . $value->ID . '" ><a href="'.get_permalink($value->ID).'" class="modules-submenu">' .  $value->post_title . '</a>';
+							echo '<li class="clear-both' . $active . '"><a href="'.get_permalink($value->ID) . '" class=" pr-2 pt-2 pb-2 pl-4 modules-menu-list ">' .  $value->post_title . '</a>';
 							$module_child_posts = get_children( $arg_child_post );
-							echo '<ul class="mb-2 clear-both">';
-							foreach ($module_child_posts as $value1) {
-								$active_l2 = ($value1->ID == $mod_current)? "current-menu active": '';
-
-								echo '<li class="clear-both pr-2 pt-2 pb-2 pl-4 btn-ajax'. $active_menu .'" data="0" load="' . $value1->ID . '" ><a href="'.get_permalink($value1->ID).'">' .  $value1->post_title . '</a></li>';
+							if (count($module_child_posts)) {
+								echo '<ul class="clear-both">';
+								foreach ($module_child_posts as $value1) {
+									$active2 = $mod_current == $value1->ID ? ' current-menu ': '';
+									echo '<li class="clear-both' . $active2 . '"><a href="'.get_permalink($value1->ID).'" class=" modules-submenu ">' .  $value1->post_title . '</a></li>';
+								}
+								echo '</ul>';	
 							}
-							echo '</ul>';
+							
 							echo '</li>';
 						}
 						?>

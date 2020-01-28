@@ -11,10 +11,14 @@ jQuery(document).ready( function($) {
 		$(this).next(".accordion-desc").slideToggle();
 	})
 	$('#module-current').ready(function() {
-
+		var browserUrl = window.location.href;
 		$('#module-current a').each(function(i, data){
-			if( $(data).attr("href") == window.location.href ) {
+			if( $(data).attr("href") == browserUrl ) {
 				$(data).parent().addClass('current-menu');
+				$(data).parent().addClass('active').parent().addClass('active').parent().addClass('active');
+			}
+			console.log($(data).parent().hasClass('current-menu'));
+			if(browserUrl.indexOf('chapter') != -1 && $(data).parent().hasClass('current-menu') ) {
 				$(data).parent().addClass('active').parent().addClass('active').parent().addClass('active');
 			}
 		});
