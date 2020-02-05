@@ -309,17 +309,23 @@ ul {
 	border-right: 1px solid #ddd;
 	background-color: #f0f0f0;
 }
-body.single-modules {
-	padding-bottom: 275px;
+body.single-modules, body.single-chapters {
+	padding-bottom: 100px;
 }
-.single-modules .left-panel-module, .single-modules .right-panel-module {
-	padding-bottom: 45px;
+.single-modules .left-panel-module, .single-modules .right-panel-module,
+.single-chapters .left-panel-module, .single-chapters .right-panel-module{
+	padding-bottom: 250px;
 }
 .content-module {
 
 }
 .content-navigate-module {
 
+}
+.right-panel-module {
+	background-image: url(http://include.edc.org/sites/all/themes/edc_include/images/content-bg.png);
+	background-repeat: repeat-y;
+	background-position: top left;
 }
 .left-panel-module ul {
 	list-style: none;
@@ -331,6 +337,9 @@ body.single-modules {
 	background-color: #fff;
 	margin-top: 10px;
 	margin-right: -15px;
+	background-image: url(http://include.edc.org/sites/all/themes/edc_include/images/menu-bttn-bg.png);
+   background-repeat:repeat-y;
+	background-position: top right;
 }
 .left-panel-module > ul ul {
 	background-color: #fff;
@@ -556,11 +565,9 @@ text-align: center;
     font-weight: 700;
     padding: 0px !important;
     z-index: 10;
-	color: #000 !important;
-    background-color: #fff;
     position: absolute;
-    right: 15px;
-    top: 10px;
+    right: 30px;
+    top: 30px;
 }
 .caption-health-promotion{
 	width:450px;
@@ -752,7 +759,6 @@ span.wpcf7-list-item {
 }
 .modal-content {
 	padding: 15px;
-    width: fit-content;
 }
 .modal-title {
 	font-size: 125%;
@@ -791,6 +797,16 @@ html body .userway .userway_accessibility_icon {
 }
 .dex-img {
 	float:right;
+}
+figure {
+  float: right;
+  width: auto;
+  text-align: right;
+  text-indent: 0;
+  margin: 0.5em;
+}
+img.scaled {
+  width: 100%;
 }
 
  .stakeholder-form .rTableCell, .stakeholder-form .rTableHead{width:16.16%;}
