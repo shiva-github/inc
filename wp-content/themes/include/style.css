@@ -18,6 +18,41 @@ html {
 	
 	height: calc(100% - 32px);
 }
+
+
+.pop-div1 { position: absolute;
+	        background-color: #fff;
+	        max-width: 300px;
+	        bottom: 25px;
+	        left: 0;
+	        right: 0;
+	        border: 1px solid #ddd;
+	        padding: 1px;
+	        display: none;
+	        z-index: 2;
+	       }
+.pop-div1:after { content: '';
+                  position: absolute;left: 0;
+                  right: 0;
+                  margin: auto;
+                  z-index: -12;
+                  border-left: 10px solid transparent;
+                  border-top: 10px solid #999;
+                  width: 20px;
+                  border-right: 10px solid transparent;
+              }
+.pop-div1-title { background-color: #d9d9d9;
+	              padding: 9px;
+	              font-weight: bold;
+	          }
+.pop-div1-desc { 
+	            padding: 9px;
+	            margin-top: 5px;
+	        }
+.hover-show:hover .pop-div1 { 
+	                      display:block;
+	                  }
+
 body {
 	min-height: 100%;
 	position: relative;

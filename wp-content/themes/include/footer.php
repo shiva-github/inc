@@ -6,7 +6,7 @@
 				<div class="cbr-modal-header" id="modal-cbr">
 					<h3 class="cbr-logo-modal float-left">
 						<span class="cbr-modal">CBR</span>
-						<span class="in-action-modal">in action</span>
+						<span class="in-action-modal">in<br> action</span>
 					</h3>
 				</div>
 				<!-- Modal Header -->
@@ -52,7 +52,7 @@
 		</div>
 	</div>
 </footer>
-
+<input type="hidden" value="<?php echo get_current_user_id(); ?>" id="cust_pid">
 
 <script type="text/javascript">
 var _userway_config = {
