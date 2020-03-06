@@ -6,13 +6,13 @@ jQuery(document).ready( function($) {
 		var pane_id = 'v-pills-'+ tab_id;
 		var param1 = $(this).attr('href');
 		var param2 = $('#'+pane_id + ' input[name="LoggedUserId"]').val();
-		
+
 		formLoadAjax_fun(param1, param2);
 	});
 
 
 	//replacing form on load function calls
-	jQuery(document).on('click', '.reflect-now-modal, .save-btn-load', function() {
+	jQuery(document).on('click', '.reflect-now-modal, .save-btn-load, .SaveBtncls', function() {
 		try {
 			var var_form = jQuery(this).data('fid').split('-')[1];
 			var fid = '';
@@ -21,27 +21,31 @@ jQuery(document).ready( function($) {
 			} else {
 				return;
 			}
-			
+
 			var tab_text = '#v-pills-' + fid;
 			var cust_pid = jQuery('#cust_pid').val();
-			formLoadAjax_fun(tab_text, cust_pid);
+			setTimeout(function() {
+				formLoadAjax_fun(tab_text, cust_pid);
+			}, 1000);
 		} catch(ex) {
 			console.log('Error', ex);
 		}
-		
+
 	});
 
 	//replacing form on load function calls
 	jQuery(document).on('click', '.bookmark', function() {
 		try {
 			var cust_pid = jQuery('#cust_pid').val();
+			var data_link = jQuery(this).data('link');
 			var formData = {
 				'action'	: 'add_bookmark_for_user',
 				'link'		: window.location.href,
 				'uid'		: cust_pid,
-				'userBtn'	: $(this).attr('id')
+				'userBtn'	: $(this).attr('id'),
+				'status'	: data_link
 			};
-			
+
 			if (typeof cust_pid != 'undefined' && cust_pid != null && cust_pid != '' ) {
 				add_bookmark(formData);
 			}
@@ -85,14 +89,22 @@ function formLoadAjax_fun(value1, pane_id) {
 
 
 
-function add_bookmark(value1) {	
+function add_bookmark(value1) {
 	jQuery.ajax({
 		url: ajax_object.ajax_url,
 		data: value1,
 		method: "POST",
 		success: function(result) {
 			var complete_obj = JSON.parse(result);
-			console.log(complete_obj);
+			// $('#' + complete_obj.data[0].button).text("REMOVE");
+			// console.log($('#' + complete_obj.data[0].button));
+			if( complete_obj.data[0].status == 1 ) {
+				jQuery( '#' + complete_obj.data[0].button ).text("REMOVE");
+				jQuery( '#' + complete_obj.data[0].button ).data('link', 1);
+			} else {
+				jQuery( '#' + complete_obj.data[0].button ).text("ADD");
+				jQuery( '#' + complete_obj.data[0].button ).data('link', 0);
+			}
 		},
 		err: function(error) {
 			console.log(error);
@@ -102,14 +114,20 @@ function add_bookmark(value1) {
 
 
 
-function get_bookmark_for_user(value1) {	
+function get_bookmark_for_user(value1) {
 	jQuery.ajax({
 		url: ajax_object.ajax_url,
 		data: value1,
 		method: "POST",
 		success: function(result) {
 			var complete_obj = JSON.parse(result);
-			console.log(complete_obj);
+			if( complete_obj.data[0].status == 1 ) {
+				jQuery( '#' + complete_obj.data[0].button ).text("REMOVE");
+				jQuery( '#' + complete_obj.data[0].button ).data('link', 1);
+			} else {
+				jQuery( '#' + complete_obj.data[0].button ).text("ADD");
+				jQuery( '#' + complete_obj.data[0].button ).data('link', 0);
+			}
 		},
 		err: function(error) {
 			console.log(error);

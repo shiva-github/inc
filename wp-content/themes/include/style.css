@@ -99,7 +99,10 @@ body {
 	min-height: 50px;
 	padding: 0px;
 }
-
+.add-me {
+	margin-top:13px;
+	margin-bottom:10px;
+}
 .background-header .nav-item.nav-link {
 	color: #fff;
 	font-weight: lighter;

@@ -3,7 +3,8 @@
 require_once 'class-wp-bootstrap-navwalker.php';
 require_once 'functions/module-ajax.php';
 require_once 'functions/forms_class.php';
-require_once 'functions/form_manager.php';	
+require_once 'functions/form_manager.php';
+
 
 
 function fire_theme_enqueue_scripts() {
@@ -29,8 +30,6 @@ function fire_theme_enqueue_scripts() {
 	}
 
 	wp_enqueue_script( 'ajax-script', get_template_directory_uri() . '/assets/js/ajax-script-admin.js', array('jquery'), '20120206', true );
-	// wp_enqueue_script('ajax-script');
-
 	wp_localize_script( 'ajax-script', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 
 }
@@ -373,12 +372,12 @@ function save_contact_form_data($cf7) {
 	}
 
 	$dbman = new dbmanager();
-    $dbman->table_create('form_' . $table_name, $table_cols);
+	$dbman->table_create('form_' . $table_name, $table_cols);
 	$data['updated_time'] = '' . current_time( 'mysql' );
 	$data['created_time'] = '' . current_time( 'mysql' );
 	
 	// $dbman->insert_record('{table name}', {userid}, {data send by user});
-    $test = $dbman->insert_record('form_' . $table_name, $user_login, $data);
+	$test = $dbman->insert_record('form_' . $table_name, $user_login, $data);
 	
 
 
@@ -472,7 +471,7 @@ function form_data_fetch() {
 	$args = array('post_type' => 'wpcf7_contact_form', 'posts_per_page' => -1);
 	$cf7Forms = get_post( $form_id, $args );
 	$title = strtolower($cf7Forms->post_title);
-    $table_name = 'form_' . preg_replace('/[^a-zA-Z0-9_.]/', '_', $title);	
+	$table_name = 'form_' . preg_replace('/[^a-zA-Z0-9_.]/', '_', $title);
 	$dbman = new dbmanager();
 	$json_data = $dbman->fetch_form_data_from_table($table_name, $userid);
 	if (count($json_data) == 0) {
@@ -503,7 +502,7 @@ function additional_fields () {
 
 add_action( 'comment_post', 'save_comment_meta_data' );
 function save_comment_meta_data( $comment_id ) {
-	
+
 	if ( ( isset( $_POST['subject'] ) ) && ( $_POST['subject'] != '') )
 		$subject = wp_filter_nohtml_kses($_POST['subject']);
 	add_comment_meta( $comment_id, 'subject', $subject );
@@ -554,38 +553,37 @@ function format_comment($comment, $args, $depth) {
 add_action( 'wp_ajax_add_bookmark_for_user', 'add_bookmark_for_user' );
 function add_bookmark_for_user() {
 	$dbman = new dbmanager();
-	
+
 	$table_add['LoggedUserId'] 		= intval($_POST['uid']);
 	$table_add['link'] 				= htmlspecialchars($_POST['link']);
 	$table_add['button']			= htmlspecialchars($_POST['userBtn']);
+	$table_add['status']			= htmlspecialchars($_POST['status']) == 0 ? 1:0 ;
 	$table_add['updated_time'] 		= '' . current_time( 'mysql' );
 	$table_add['created_time'] 		= '' . current_time( 'mysql' );
 	 //create table
-	 $table = 'user_bookmark';
-	 $table_add_create['LoggedUserId'] 		= 'input_number';
-	 $table_add_create['link']			= 'input_text';
-	 $table_add_create['button']			= 'input_text';
-	 $dbman->table_create($table, $table_add_create);
-	 echo json_encode($dbman->table_create($table, $table_add_create));
-	
+	$table = 'user_bookmark';
+	$table_add_create['LoggedUserId'] 	= 'input_number';
+	$table_add_create['link']			= 'input_text';
+	$table_add_create['button']			= 'input_text';
+	$dbman->table_create($table, $table_add_create);
 	// add update record
 	$json_data = $dbman->insert_record('user_bookmark', $table_add['LoggedUserId'], $table_add);
 	if (count($json_data) == 0) {
 		echo json_encode('{status: "Error", code:1}');
 	} else {
 		$json_data_res['status'] = 'Success!';
-		$json_data_res['data'] = $json_data;
+		$json_data_res['data'] = [$table_add];
 		$json_data_res['code'] = 2;
 		echo json_encode($json_data_res);
 	}
-	
+
 	wp_die();
 }
 // ajax call for getting bookmark
 add_action( 'wp_ajax_get_bookmark_for_user', 'get_bookmark_for_user' );
 function get_bookmark_for_user() {
 	$dbman = new dbmanager();
-	
+
 	// Get record...
 	$json_data = $dbman->fetch_form_data_from_table('user_bookmark', intval($_POST['uid']));
 	if (count($json_data) == 0) {
